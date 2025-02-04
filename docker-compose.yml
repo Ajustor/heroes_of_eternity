@@ -1,0 +1,31 @@
+services:
+  front:
+    container_name: heroes-of-eternity_front
+    image: oven/bun:slim
+    user: bun
+    ports:
+      - "${DOCKER_FRONT_EXTERNAL_PORT}:8080"
+    working_dir: /home/bun/app/apps/front
+    volumes:
+      - .:/home/bun/app:cached
+    command: bun dev
+    networks:
+      - heroes-of-eternity 
+
+  back:
+    container_name: heroes-of-eternity_back
+    image: oven/bun:slim
+    user: bun
+    ports:
+      - "${DOCKER_BACK_EXTERNAL_PORT}:3000"
+    working_dir: /home/bun/app/apps/back
+    volumes:
+      - .:/home/bun/app:cached
+    command: bun dev
+    networks:
+      - heroes-of-eternity
+    depends_on:
+      - mongo
+
+networks:
+  hereos-of-eternity:
