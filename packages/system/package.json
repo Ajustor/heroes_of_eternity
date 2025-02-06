@@ -1,0 +1,15 @@
+{
+  "name": "@hoe/system",
+  "module": "dist/index.js",
+  "types": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build --outdir=dist --minify --splitting src/index.ts --target=bun"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

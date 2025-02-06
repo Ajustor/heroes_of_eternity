@@ -1,8 +1,17 @@
 import { drizzle as tursoDrizzle } from 'drizzle-orm/libsql'
-import { createClient } from '@libsql/client'
+import { createClient, type Client } from '@libsql/client/sqlite3'
 
-const url: string = JSON.parse(Bun.env.LOCAL ?? 'true') ? `file:hoe.sqlite` : `${Bun.env.TURSO_URL}`
 
-export const sqliteClient = createClient({ url, authToken: Bun.env.TURSO_TOKEN })
+export function getClient({ url, authToken }: { url: string, authToken?: string }) {
+  return createClient({
+    url,
+    ...(authToken && { authToken }),
+  })
+}
 
-export const db = tursoDrizzle(sqliteClient)
+export function getDB(client: Client) {
+  return tursoDrizzle(client)
+}
+
+
+export * from './schemas'

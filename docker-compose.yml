@@ -24,8 +24,6 @@ services:
     command: bun dev
     networks:
       - heroes-of-eternity
-    depends_on:
-      - mongo
 
 networks:
-  hereos-of-eternity:
+  heroes-of-eternity:

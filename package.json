@@ -8,12 +8,18 @@
     "packages/*"
   ],
   "scripts": {
-    "build:front": "(cd apps/front && bun run build)",
-    "start:back": "(cd apps/back && bun run dev)",
-    "dev:front": "(cd apps/front && bun run dev)",
-    "start:front": "(cd apps/front && bun run start)"
+    "build:front": "bun run build --filter \"apps/front\"",
+    "build:back": "bun run build --filter \"apps/back\"",
+    "start:back": "bun run dev --filter \"apps/back\"",
+    "dev:front": "bun run dev --filter \"apps/front\"",
+    "start:front": "bun run start --filter \"apps/front\"",
+    "build:deps": "bun run build --filter \"packages/*\"",
+    "migrate": "bun run migration --filter \"packages/db\""
   },
   "dependencies": {
-    "drizzle-typebox": "^0.3.0"
+    "@elysiajs/swagger": "^1.2.2",
+    "@tailwindcss/vite": "^4.1.4",
+    "drizzle-typebox": "^0.3.2",
+    "tailwindcss": "^4.1.4"
   }
 }
