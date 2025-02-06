@@ -1,8 +1,8 @@
-import { drizzle } from 'drizzle-orm/libsql/node';
+import { drizzle as tursoDrizzle } from 'drizzle-orm/libsql'
+import { createClient } from '@libsql/client'
 
-export const db = drizzle({
-  connection: {
-    url: process.env.DATABASE_URL,
-    authToken: process.env.DATABASE_AUTH_TOKEN
-  }
-});
+const url: string = JSON.parse(Bun.env.LOCAL ?? 'true') ? `file:hoe.sqlite` : `${Bun.env.TURSO_URL}`
+
+export const sqliteClient = createClient({ url, authToken: Bun.env.TURSO_TOKEN })
+
+export const db = tursoDrizzle(sqliteClient)
