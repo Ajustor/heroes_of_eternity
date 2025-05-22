@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "start:back": "(cd apps/back && bun run dev)",
-    "start:front": "(cd apps/front && bun run dev)"
+    "dev:front": "(cd apps/front && bun run dev)",
+    "start:front": "(cd apps/front && bun run start)"
   },
   "dependencies": {
     "drizzle-typebox": "^0.3.0"
