@@ -1,16 +1,16 @@
 import { charactersTable } from './character'
 import { itemsTable } from './items'
-import { sqliteTable, int, text, primaryKey, index } from 'drizzle-orm/sqlite-core'
+import { pgTable, integer, text, primaryKey, } from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-typebox'
 
-export const bagsTable = sqliteTable('bag_table', {
+export const bagsTable = pgTable('bag_table', {
   characterId: text('character_id').references(() => charactersTable.id, {
     onDelete: 'cascade',
   }),
   itemId: text('item_id').references(() => itemsTable.id, {
     onDelete: 'cascade',
   }),
-  amount: int().notNull().default(0)
+  amount: integer().notNull().default(0)
 }, (table) => [primaryKey({ columns: [table.characterId, table.itemId] })])
 
 export type BagEntity = typeof bagsTable.$inferSelect

@@ -25,5 +25,22 @@ services:
     networks:
       - heroes-of-eternity
 
+  postgres:
+    image: postgres:15-alpine
+    container_name: heroes-of-eternity_postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "${DATABASE_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - heroes-of-eternity
+
+volumes:
+  postgres_data:
+
 networks:
   heroes-of-eternity:

@@ -1,17 +1,17 @@
-import { int, sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { integer, pgTable, text } from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-typebox'
 import { createId } from '@paralleldrive/cuid2'
 
-export const beastsTable = sqliteTable('beast_table', {
+export const beastsTable = pgTable('beast_table', {
   id: text('id').primaryKey().$defaultFn(createId),
   name: text().notNull(),
-  maxMana: int().notNull(),
-  maxLife: int().notNull(),
-  intelligence: int().notNull(),
-  strength: int().notNull(),
-  agility: int().notNull(),
-  dexterity: int().notNull(),
-  experience: int(),
+  maxMana: integer().notNull(),
+  maxLife: integer().notNull(),
+  intelligence: integer().notNull(),
+  strength: integer().notNull(),
+  agility: integer().notNull(),
+  dexterity: integer().notNull(),
+  experience: integer(),
 })
 
 export type BeastEntity = typeof beastsTable.$inferSelect

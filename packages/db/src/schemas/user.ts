@@ -1,8 +1,8 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core'
+import { pgTable, text } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
 import { createInsertSchema } from 'drizzle-typebox'
 
-export const usersTable = sqliteTable('users_table', {
+export const usersTable = pgTable('users_table', {
   id: text('id').primaryKey().$defaultFn(createId),
   username: text().notNull(),
   email: text().notNull().unique(),

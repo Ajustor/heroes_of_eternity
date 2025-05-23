@@ -1,15 +1,6 @@
-import { migrate } from 'drizzle-orm/libsql/migrator'
+import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { getDB } from './src'
-import { createClient } from '@libsql/client'
 
-const url: string = JSON.parse(Bun.env.LOCAL ?? 'true')
-  ? `file:./hoe.sqlite`
-  : `${Bun.env.TURSO_URL}`
+const url: string = `postgresql://${Bun.env.DATABASE_USER}:${Bun.env.DATABASE_PASSWORD}@${Bun.env.DATABASE_HOST}:${Bun.env.DATABASE_PORT}/${Bun.env.DATABASE_NAME}`
 
-const sqliteClient = createClient({
-  url,
-  ...(Bun.env.TURSO_TOKEN && { authToken: Bun.env.TURSO_TOKEN }),
-})
-
-
-await migrate(getDB(sqliteClient), { migrationsFolder: './drizzle' })
+await migrate(getDB(url), { migrationsFolder: './drizzle' })

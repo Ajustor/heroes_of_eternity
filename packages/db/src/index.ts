@@ -1,17 +1,7 @@
-import { drizzle as tursoDrizzle } from 'drizzle-orm/libsql'
-import { createClient, type Client } from '@libsql/client/sqlite3'
+import { drizzle } from 'drizzle-orm/postgres-js'
 
-
-export function getClient({ url, authToken }: { url: string, authToken?: string }) {
-  return createClient({
-    url,
-    ...(authToken && { authToken }),
-  })
+export function getDB(dbUrl: string) {
+  return drizzle(dbUrl)
 }
-
-export function getDB(client: Client) {
-  return tursoDrizzle(client)
-}
-
 
 export * from './schemas'
