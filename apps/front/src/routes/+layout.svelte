@@ -27,7 +27,16 @@
 
 <Toaster position="bottom-right" richColors closeButton expand />
 
-<div class="drawer">
+{#snippet navbar()}
+	<li><a href="/" class="flex items-center gap-4"><Icon icon="iconamoon:home" /> Accueil</a></li>
+	<li>
+		<a href="/characters" class="flex items-center">
+			<Icon icon="game-icons:character" /> Personnages
+		</a>
+	</li>
+{/snippet}
+
+<div class="drawer p-4">
 	<input
 		id="my-drawer"
 		type="checkbox"
@@ -36,21 +45,22 @@
 		class="drawer-toggle"
 	/>
 	<div class="drawer-content">
-		<label for="my-drawer" class="btn btn-primary drawer-button">
+		<label for="my-drawer" class="btn btn-primary drawer-button lg:hidden">
 			<Icon icon="iconamoon:menu-burger-horizontal-bold" />
 		</label>
+		<div class="hidden flex-none lg:block">
+			<ul class="menu menu-horizontal">
+				{@render navbar()}
+			</ul>
+		</div>
 	</div>
 	<div class="drawer-side bg-base-200 text-base-content min-h-full">
 		<label for="my-drawer" aria-label="close sidebar" class="drawer-overlay">{isDrawerOpen}</label>
-		<div
-			class="content menu bg-base-200 text-base-content min-h-full w-80 p-4"
-			onclickcapture={close}
-		>
+		<div class="content bg-base-200 text-base-content min-h-full w-80 p-4" onclickcapture={close}>
 			<div class="flex flex-col gap-2">
-				<a href="/" class="flex items-center gap-4"><Icon icon="iconamoon:home" /> Accueil</a>
-				<a href="/characters" class="flex items-center">
-					<Icon icon="game-icons:character" /> Personnages
-				</a>
+				<ul class="menu">
+					{@render navbar()}
+				</ul>
 			</div>
 
 			<footer class="footer p-10">

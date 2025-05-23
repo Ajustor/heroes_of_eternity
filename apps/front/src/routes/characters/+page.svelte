@@ -41,9 +41,9 @@
 	<button class="btn" onclick={() => createCharacterModal?.showModal()}>Créer un personnage</button>
 	<dialog bind:this={createCharacterModal} class="modal">
 		<div class="modal-box">
-			<form method="POST" action="?/newCharacter" use:charactersEnhance>
+			<form method="POST" action="?/newCharacter" class="flex flex-col gap-3" use:charactersEnhance>
 				<div class="flex flex-col gap-3">
-					<label for="name">Nom</label>
+					<label for="name">Nom du personnage</label>
 					<input
 						class="input validator"
 						required
@@ -57,6 +57,9 @@
 				<button class="btn">Créer</button>
 			</form>
 		</div>
+		<form method="dialog" class="modal-backdrop">
+			<button>close</button>
+		</form>
 	</dialog>
 {/snippet}
 
@@ -65,7 +68,11 @@
 
 	{@render createCharacterForm()}
 
-	{#each data.myCharacters as character}
-		<CharacterCard {character} />
-	{/each}
+	<div class="carousel rounded-box mt-5">
+		{#each data.myCharacters as character}
+			<div class="carousel-item">
+				<CharacterCard {character} />
+			</div>
+		{/each}
+	</div>
 </div>
