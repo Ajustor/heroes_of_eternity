@@ -13,7 +13,7 @@
     "start:back": "(cd apps/back && bun run dev)",
     "dev:front": "(cd apps/front && bun run dev)",
     "start:front": "(cd apps/front && bun run start)",
-    "build:deps": "(cd packages/db && bun run build) && (cd packages/assets && bun run build) && (cd packages/system && bun run build)",
+    "build:deps": "(cd packages/assets && bun run build) && (cd packages/system && bun run build) && (cd packages/db && bun run build)",
     "generate:migrations": "(cd packages/db && bun run generate:migrations)",
     "migrate": "(source .env && cd packages/db && bun run migration)"
   },
