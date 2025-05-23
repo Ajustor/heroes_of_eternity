@@ -3,7 +3,11 @@ import { defineConfig } from 'drizzle-kit'
 export default defineConfig({
   schema: './src/schemas/**/*.ts',
   out: './drizzle',
-  dialect: 'sqlite', // 'postgresql' | 'mysql' | 'sqlite'
+  dialect: 'postgresql', // 'postgresql' | 'mysql' | 'sqlite'
   verbose: true,
   strict: true,
+  migrations: {
+    table: 'migrations',
+    schema: 'public',
+  }
 })

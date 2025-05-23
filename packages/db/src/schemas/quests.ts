@@ -1,14 +1,16 @@
-import { integer, primaryKey, pgTable, text } from 'drizzle-orm/pg-core'
+import { integer, primaryKey, pgTable, text, pgEnum } from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-typebox'
 import { createId } from '@paralleldrive/cuid2'
 import { BACKGROUNDS_KEYS } from "@hoe/assets"
-import { count, relations } from 'drizzle-orm'
+import { relations } from 'drizzle-orm'
 import { beastsTable } from './beast'
 import { itemsTable } from './items'
 
+export const zoneEnum = pgEnum('zone', [BACKGROUNDS_KEYS.Body, BACKGROUNDS_KEYS.Chaos, BACKGROUNDS_KEYS.Dark])
+
 export const stepsTable = pgTable('steps_table', {
   id: text('id').primaryKey().$defaultFn(createId),
-  zone: text({ enum: [BACKGROUNDS_KEYS.Body, BACKGROUNDS_KEYS.Chaos, BACKGROUNDS_KEYS.Dark] }),
+  zone: zoneEnum(),
 })
 
 export const stepsRelations = pgTable('beast_on_step', {

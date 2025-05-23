@@ -8,13 +8,14 @@
     "packages/*"
   ],
   "scripts": {
-    "build:front": "bun run build --filter \"apps/front\"",
-    "build:back": "bun run build --filter \"apps/back\"",
-    "start:back": "bun run dev --filter \"apps/back\"",
-    "dev:front": "bun run dev --filter \"apps/front\"",
-    "start:front": "bun run start --filter \"apps/front\"",
-    "build:deps": "bun run build --filter \"packages/*\"",
-    "migrate": "bun run migration --filter \"packages/db\""
+    "build:front": "(cd apps/front && bun run build)",
+    "build:back": "(cd apps/back && bun run build)",
+    "start:back": "(cd apps/back && bun run dev)",
+    "dev:front": "(cd apps/front && bun run dev)",
+    "start:front": "(cd apps/front && bun run start)",
+    "build:deps": "(cd packages/db && bun run build) && (cd packages/assets && bun run build) && (cd packages/system && bun run build)",
+    "generate:migrations": "(cd packages/db && bun run generate:migrations)",
+    "migrate": "(source .env && cd packages/db && bun run migration)"
   },
   "dependencies": {
     "@elysiajs/swagger": "^1.2.2",

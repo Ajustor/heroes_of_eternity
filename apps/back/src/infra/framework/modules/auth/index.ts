@@ -1,5 +1,3 @@
-import { db } from '@/infra/framework/data/sqlite/database'
-import { SqliteUsersRepository } from '@/infra/framework/data/sqlite/user.repository'
 import { Elysia, NotFoundError, t } from 'elysia'
 import { authorization } from '../../../../libs/handlers/authorization'
 import { LoginUsecase } from '@/use-cases/auth/login/login'
@@ -8,9 +6,11 @@ import { IForgotUsecase } from '@/use-cases/auth/i-forgot/i-forgot'
 import { EmailSender } from '@/infra/framework/notifications/email'
 import { jwtMiddleware } from '../../../../libs/jwt'
 import { SecurityService } from '@/core/domain/secutiry.service'
+import { PostgresUserRepository } from '../../data/postgres/user.repository'
+import { db } from '../../data/postgres/database'
 
 export const authModule = new Elysia({ prefix: 'auth' })
-  .decorate({ usersRepository: new SqliteUsersRepository(db) })
+  .decorate({ usersRepository: new PostgresUserRepository(db) })
   .decorate(({ usersRepository }) => ({
     loginUsecase: new LoginUsecase(usersRepository, new SecurityService()),
     iForgotUsecase: new IForgotUsecase(usersRepository, new EmailSender())

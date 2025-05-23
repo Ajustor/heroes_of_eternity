@@ -1,5 +1,5 @@
 import { Repository } from '@/core/base/repository'
-import { User, UserCreation, UserEntity } from '@hoe/db'
+import { UserCreation, UserEntity } from '@hoe/db'
 
 export abstract class UsersRepository extends Repository<UserEntity, UserCreation> {
   abstract resetPassword({

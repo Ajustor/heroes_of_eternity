@@ -4,21 +4,21 @@ import { CHARACTERS_KEYS } from '@hoe/assets'
 import type { CharacterEntity } from '@hoe/db'
 
 export class Character {
-    id: string
-    userId: string
-    name: string
-    level: number
-    job: JOBS
-    skin: CHARACTERS_KEYS
-    maxMana: number
-    mana: number
-    maxLife: number
-    life: number
-    intelligence: number
-    strength: number
-    agility: number
-    dexterity: number
-    experience: number
+    private id: string
+    private userId: string
+    private name: string
+    private level: number
+    private job: JOBS
+    private skin: CHARACTERS_KEYS
+    private maxMana: number
+    private mana: number
+    private maxLife: number
+    private life: number
+    private intelligence: number
+    private strength: number
+    private agility: number
+    private dexterity: number
+    private experience: number
 
     constructor(data: CharacterEntity) {
         this.id = data.id

@@ -1,3 +1,3 @@
 export enum JOBS {
-    FREELANCE= 'freelance',
+    FREELANCE = 'freelance',
 }

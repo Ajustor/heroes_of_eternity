@@ -1,4 +1,4 @@
-import { drizzle } from 'drizzle-orm/postgres-js'
+import { drizzle } from 'drizzle-orm/node-postgres'
 
 export function getDB(dbUrl: string) {
   return drizzle(dbUrl)

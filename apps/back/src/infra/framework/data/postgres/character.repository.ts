@@ -1,18 +1,18 @@
 import { CharacterRepository } from '@/core/domain/repositories/character.repository'
 import { CharacterEntity, CharacterCreation, charactersTable } from '@hoe/db'
-import { LibSQLDatabase } from 'drizzle-orm/libsql'
 import { and, eq, or } from 'drizzle-orm'
 import { OPERATOR } from '@/core/domain/repositories/base.repository'
+import { DatabaseConnection } from './database'
 
-export class SqliteCharacterRepository implements CharacterRepository {
-  constructor(private readonly client: LibSQLDatabase) {}
+export class PostgresCharacterRepository implements CharacterRepository {
+  constructor(private readonly client: DatabaseConnection) { }
 
   async create(character: CharacterCreation): Promise<CharacterEntity> {
     const [createdCharacter] = await this.client
       .insert(charactersTable)
       .values(character)
       .returning()
-    
+
     return createdCharacter
   }
 
@@ -38,42 +38,32 @@ export class SqliteCharacterRepository implements CharacterRepository {
       .from(charactersTable)
       .where(whereRequest)
 
-    return character
+    return character || null
   }
 
-  async findAll(filter?: Partial<CharacterEntity>, operator: OPERATOR = OPERATOR.OR): Promise<CharacterEntity[]> {
-    const fieldsFilters = []
-
-    if (filter?.id) {
-      fieldsFilters.push(eq(charactersTable.id, filter.id))
-    }
-
-    if (filter?.name) {
-      fieldsFilters.push(eq(charactersTable.name, filter.name))
-    }
-
-    if (!fieldsFilters.length) {
-      return await this.client.select().from(charactersTable)
-    }
-
-    const whereRequest = operator === OPERATOR.OR ? or(...fieldsFilters) : and(...fieldsFilters)
-
+  async findAll(): Promise<CharacterEntity[]> {
     return await this.client
       .select()
       .from(charactersTable)
-      .where(whereRequest)
   }
 
-  async update(id: string, data: Partial<CharacterEntity>): Promise<CharacterEntity | null> {
-    await this.client
+  async update(id: string, character: Partial<CharacterEntity>): Promise<CharacterEntity | null> {
+    const [updatedCharacter] = await this.client
       .update(charactersTable)
-      .set(data)
+      .set(character)
       .where(eq(charactersTable.id, id))
+      .returning()
 
-    return this.findOne({ id })
+    return updatedCharacter || null
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.client
+      .delete(charactersTable)
+      .where(eq(charactersTable.id, id))
   }
 
   async remove(id: string): Promise<void> {
-    await this.client.delete(charactersTable).where(eq(charactersTable.id, id))
+    await this.delete(id)
   }
 }

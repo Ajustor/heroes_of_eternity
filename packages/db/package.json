@@ -2,7 +2,7 @@
   "name": "@hoe/db",
   "version": "0.1.0",
   "type": "module",
-  "module": "dist/index.ts",
+  "module": "dist/index.js",
   "types": "src/index.ts",
   "files": [
     "dist"
@@ -26,6 +26,8 @@
     "@libsql/client": "^0.14.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.39.2"
+    "drizzle-orm": "^0.42.0",
+    "pg": "^8.16.0",
+    "postgres": "^3.4.7"
   }
 }
