@@ -5,7 +5,7 @@ import IForgetEmailTemplate from 'src/emailTemplates/i-forget'
 
 export class IForgotUsecase implements UseCase<void> {
 
-  constructor(private readonly usersRepository: UsersRepository, private readonly notificationService: NotificationService) {}
+  constructor(private readonly usersRepository: UsersRepository, private readonly notificationService: NotificationService) { }
 
   async execute(email: string): Promise<void> {
     const user = await this.usersRepository.findOne({ email })
@@ -18,7 +18,7 @@ export class IForgotUsecase implements UseCase<void> {
       authorizationKey: user.authorizationKey ?? '',
       userId: user.id,
       username: user.username,
-      frontUrl: Bun.env.frontUrl ?? ''
+      frontUrl: process.env.frontUrl ?? ''
     }))
   }
 }

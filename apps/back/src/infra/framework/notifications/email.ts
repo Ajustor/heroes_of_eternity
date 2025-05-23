@@ -6,7 +6,7 @@ export class EmailSender implements NotificationService {
   private client: Resend
 
   constructor() {
-    const { RESEND_API_KEY } = Bun.env
+    const { RESEND_API_KEY } = process.env
     if (!RESEND_API_KEY) {
       throw new Error("No api key is presend for resend")
     }
