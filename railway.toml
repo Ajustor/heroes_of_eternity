@@ -5,34 +5,34 @@ branch = "master"
 
 databases = [
   {
-    name = "postgres"
-    type = "postgres"
+    name = "postgres",
+    type = "postgres",
     size = "free"
   }
 ]
 
 services = [
   {
-    name = "backend"
-    type = "nodejs"
-    port = 3000
-    path = "apps/back"
+    name = "backend",
+    type = "nodejs",
+    port = 3000,
+    path = "apps/back",
     env = {
-      DATABASE_HOST = "${{DATABASE_HOST}}"
-      DATABASE_NAME = "${{DATABASE_NAME}}"
-      DATABASE_USER = "${{DATABASE_USER}}"
-      DATABASE_PASSWORD = "${{DATABASE_PASSWORD}}"
-      DATABASE_PORT = "5432"
+      DATABASE_HOST = "${{DATABASE_HOST}}",
+      DATABASE_NAME = "${{DATABASE_NAME}}",
+      DATABASE_USER = "${{DATABASE_USER}}",
+      DATABASE_PASSWORD = "${{DATABASE_PASSWORD}}",
+      DATABASE_PORT = "5432",
       NODE_ENV = "production"
     }
   },
   {
-    name = "frontend"
-    type = "nodejs"
-    port = 5173
-    path = "apps/front"
+    name = "frontend" ,
+    type = "nodejs",
+    port = 5173,
+    path = "apps/front",
     env = {
-      PUBLIC_BACK_URL = "http://${{BACKEND_HOST}}:3000"
+      PUBLIC_BACK_URL = "http://${{BACKEND_HOST}}:3000",
       NODE_ENV = "production"
     }
   }
