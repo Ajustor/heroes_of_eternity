@@ -41,10 +41,22 @@ export class PostgresCharacterRepository implements CharacterRepository {
     return character || null
   }
 
-  async findAll(): Promise<CharacterEntity[]> {
+  async findAll(filters?: Partial<CharacterEntity>, operator = OPERATOR.OR): Promise<CharacterEntity[]> {
+    const fieldsFilters = []
+    if (filters) {
+      for (const [key, value] of Object.entries(filters)) {
+        if (value) {
+          fieldsFilters.push(eq(charactersTable[key as keyof CharacterEntity], value))
+        }
+      }
+    }
+
+    const whereRequest = operator === OPERATOR.OR ? or(...fieldsFilters) : and(...fieldsFilters)
+
     return await this.client
       .select()
       .from(charactersTable)
+      .where(whereRequest)
   }
 
   async update(id: string, character: Partial<CharacterEntity>): Promise<CharacterEntity | null> {

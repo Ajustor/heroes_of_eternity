@@ -46,8 +46,11 @@
 			class="content menu bg-base-200 text-base-content min-h-full w-80 p-4"
 			onclickcapture={close}
 		>
-			<div>
-				<a href="/"><Icon icon="iconamoon:home" /> Accueil</a>
+			<div class="flex flex-col gap-2">
+				<a href="/" class="flex items-center gap-4"><Icon icon="iconamoon:home" /> Accueil</a>
+				<a href="/characters" class="flex items-center">
+					<Icon icon="game-icons:character" /> Personnages
+				</a>
 			</div>
 
 			<footer class="footer p-10">

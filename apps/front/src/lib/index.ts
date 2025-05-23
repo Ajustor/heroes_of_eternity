@@ -9,6 +9,10 @@ const characters: Record<string, string> = import.meta.glob('$lib/assets/charact
   eager: true, query: '?url', import: 'default'
 })
 
+const charactersIcons: Record<string, string> = import.meta.glob('$lib/assets/charactersIcons/*.png', {
+  eager: true, query: '?url', import: 'default'
+})
+
 const bgms: Record<string, string> = import.meta.glob('$lib/assets/bgm/*.m4a', { eager: true, query: '?url', import: 'default' })
 const bgas: Record<string, string> = import.meta.glob('$lib/assets/bga/*.m4a', { eager: true, query: '?url', import: 'default' })
 
@@ -27,5 +31,9 @@ export class Assets {
   }
   static getCharacter(path: string): string {
     return characters[`/src/lib/${path}`]
+  }
+  static getCharacterIcon(path: string): string {
+    console.log(charactersIcons, path)
+    return charactersIcons[`/src/lib/${path}`]
   }
 }
