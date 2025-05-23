@@ -5,6 +5,9 @@ const backgrounds: Record<string, string> = import.meta.glob('$lib/assets/backgr
 const bosses: Record<string, string> = import.meta.glob('$lib/assets/bosses/*.png', {
   eager: true, query: '?url', import: 'default'
 })
+const beasts: Record<string, string> = import.meta.glob('$lib/assets/beasts/*.png', {
+  eager: true, query: '?url', import: 'default'
+})
 const characters: Record<string, string> = import.meta.glob('$lib/assets/characters/*.png', {
   eager: true, query: '?url', import: 'default'
 })
@@ -28,6 +31,9 @@ export class Assets {
   }
   static getBoss(path: string): string {
     return bosses[`/src/lib/${path}`]
+  }
+  static getBeast(path: string): string {
+    return beasts[`/src/lib/${path}`]
   }
   static getCharacter(path: string): string {
     return characters[`/src/lib/${path}`]
