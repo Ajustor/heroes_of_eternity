@@ -18,10 +18,10 @@ services = [
     port = 3000,
     path = "apps/back",
     env = {
-      DATABASE_HOST = "${{DATABASE_HOST}}",
-      DATABASE_NAME = "${{DATABASE_NAME}}",
-      DATABASE_USER = "${{DATABASE_USER}}",
-      DATABASE_PASSWORD = "${{DATABASE_PASSWORD}}",
+      DATABASE_HOST = "${{PGHOST}}",
+      DATABASE_NAME = "${{PGDATABASE}}",
+      DATABASE_USER = "${{PGUSER}}",
+      DATABASE_PASSWORD = "${{PGPASSWORD}}",
       DATABASE_PORT = "5432",
       NODE_ENV = "production"
     }
