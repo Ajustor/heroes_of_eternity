@@ -1,7 +1,7 @@
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import { getDB } from './src'
 
-const url: string = `postgresql://${Bun.env.DATABASE_USER}:${Bun.env.DATABASE_PASSWORD}@${Bun.env.DATABASE_HOST}:${Bun.env.DATABASE_PORT}/${Bun.env.DATABASE_NAME}`
+const url: string = `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_NAME}`
 
 console.log('the url', url)
 
