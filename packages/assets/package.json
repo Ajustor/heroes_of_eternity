@@ -1,0 +1,23 @@
+{
+  "name": "@hoe/assets",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "src/index.ts",
+  "version": "0.1.0",
+  "files": [
+    "assets/*"
+  ],
+  "scripts": {
+    "build": "bun build --outdir=dist --minify --splitting src/index.ts --target=bun"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0"
+  }
+}

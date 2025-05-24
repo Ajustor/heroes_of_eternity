@@ -1,0 +1,39 @@
+# Railway configuration
+
+[deploy]
+branch = "master"
+
+databases = [
+  {
+    name = "postgres",
+    type = "postgres",
+    size = "free"
+  }
+]
+
+services = [
+  {
+    name = "backend",
+    type = "nodejs",
+    port = 3000,
+    path = "apps/back",
+    env = {
+      DATABASE_HOST = "${{Postgres.PGHOST}}",
+      DATABASE_NAME = "${{Postgres.PGDATABASE}}",
+      DATABASE_USER = "${{Postgres.PGUSER}}",
+      DATABASE_PASSWORD = "${{Postgres.PGPASSWORD}}",
+      DATABASE_PORT = "${{Postgres.PGPORT}}",
+      NODE_ENV = "production"
+    }
+  },
+  {
+    name = "frontend" ,
+    type = "nodejs",
+    port = 5173,
+    path = "apps/front",
+    env = {
+      PUBLIC_BACK_URL = "http://${{BACKEND_HOST}}:3000",
+      NODE_ENV = "production"
+    }
+  }
+]
