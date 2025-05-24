@@ -25,24 +25,21 @@ export const actions: Actions = {
     await login(form.data.username, form.data.password, cookies).catch(error => message(form, { status: 'error', text: 'Aucun utilisateur trouvé pour ces informations de connexion' }, error))
     const redirectTo = url.searchParams.get('redirectTo')
     if (redirectTo) {
-      throw redirect(302, `/${redirectTo.slice(1)}`)
+      return redirect(302, `/${redirectTo.slice(1)}`)
     }
-    throw redirect(302, '/')
+    return redirect(302, '/')
   },
   register: async ({ cookies, url, ...event }) => {
-    console.log('Receive register')
     const form = await superValidate({ cookies, url, ...event }, zod(newUserSchema))
-    console.log(form)
     if (!form.valid) {
       return fail(400, {
         form,
       })
     }
     await createNewUser(form.data.email, form.data.password, form.data.username).catch(error => {
-      console.log('meh', error)
-      message(form, { status: 'error', text: error.value }, error)
+      return message(form, { status: 'error', text: error.value }, error)
     })
 
-    throw redirect(302, '/login')
+    return message(form, { status: 'success', text: 'Utilisateur créé avec succès' })
   }
 }

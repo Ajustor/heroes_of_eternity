@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CharacterEntity } from '$lib/types'
+	import type { CharacterEntity } from '@hoe/db'
 	import Avatar from '../Avatar/Avatar.svelte'
 
 	export let characters: CharacterEntity[]

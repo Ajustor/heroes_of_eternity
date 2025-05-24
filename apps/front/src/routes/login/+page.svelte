@@ -19,6 +19,11 @@
 			return
 		}
 
+		if (message.status === 'success') {
+			toast.success(message.text)
+			return
+		}
+
 		toast.info(message.text)
 	}
 
