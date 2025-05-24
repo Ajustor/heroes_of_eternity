@@ -1,10 +1,11 @@
 <script lang="ts">
-	import type { CharacterEntity } from '@hoe/db'
+	import { CharacterEntity } from '@hoe/db'
 	import Avatar from '../Avatar/Avatar.svelte'
 
-	interface Props {
+	type Props = {
 		character: CharacterEntity
 	}
+
 	let { character }: Props = $props()
 </script>
 

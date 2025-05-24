@@ -35,10 +35,6 @@ export const chatStore = () => {
 
         chatApi = connectChat(user.value?.token ?? '')
         chatApi.on('message', (message) => onMessage(message.data))
-        chatApi.on('close', () => {
-            console.log('Chat closed')
-            connect()
-        })
     }
 
     return {

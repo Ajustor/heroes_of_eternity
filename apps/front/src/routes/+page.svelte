@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { BGM, BGM_KEYS, BACKGROUNDS, BACKGROUNDS_KEYS } from '@hoe/assets'
 	import { Assets } from '$lib'
 
