@@ -5,7 +5,7 @@ import { CharacterEntity } from "@hoe/db"
 export class ListCharactersUseCase implements UseCase<CharacterEntity[]> {
   constructor(private readonly characterRepository: CharacterRepository) { }
 
-  async execute(filters?: Partial<CharacterEntity>): Promise<CharacterEntity[]> {
-    return await this.characterRepository.findAll(filters)
+  execute(filters?: Record<string, any>): Promise<CharacterEntity[]> {
+    return this.characterRepository.findAll(filters as Partial<CharacterEntity>)
   }
 }

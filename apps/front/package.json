@@ -22,8 +22,8 @@
 		"@eslint/js": "^9.27.0",
 		"@hoe/db": "workspace:*",
 		"@hoe/server": "workspace:*",
-		"@sveltejs/adapter-node": "^5.2.12",
-		"@sveltejs/kit": "^2.21.1",
+		"@sveltejs/adapter-node": "5.2.9",
+		"@sveltejs/kit": "2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tailwindcss/typography": "^0.5.16",
 		"@types/bun": "^1.2.14",
@@ -39,7 +39,7 @@
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"sass-embedded": "^1.89.0",
-		"svelte": "^5.33.1",
+		"svelte": "5.28.1",
 		"svelte-check": "^4.2.1",
 		"tailwindcss": "^4.1.7",
 		"typescript": "^5.8.3",
@@ -54,7 +54,7 @@
 		"@libsql/client": "^0.15.7",
 		"drizzle-orm": "^0.43.1",
 		"jsonwebtoken": "^9.0.2",
-		"svelte-sonner": "^1.0.3",
+		"svelte-sonner": "^1.0.1",
 		"sveltekit-superforms": "^2.25.0"
 	}
 }

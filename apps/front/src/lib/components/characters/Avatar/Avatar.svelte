@@ -2,7 +2,7 @@
 	import { CHARACTERS_KEYS, CHARACTERS_ICONS } from '@hoe/assets'
 	import { Assets } from '$lib'
 
-	export type Props = {
+	type Props = {
 		skin: CHARACTERS_KEYS
 		className: string
 	}

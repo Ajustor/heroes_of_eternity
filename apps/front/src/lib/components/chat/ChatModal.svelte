@@ -10,7 +10,9 @@
 	let message: string = $state('')
 
 	function sendMessage(): void {
-		if (!message.trim()) return
+		if (!message.trim()) {
+			return
+		}
 		chat.send(message)
 		message = ''
 	}

@@ -1,12 +1,7 @@
 <script lang="ts">
-	import { CharacterEntity } from '@hoe/db'
 	import Avatar from '../Avatar/Avatar.svelte'
 
-	type Props = {
-		character: CharacterEntity
-	}
-
-	let { character }: Props = $props()
+	let { character } = $props()
 </script>
 
 <div class="card bg-neutral w-96 p-5 shadow-sm" class:bg-red-800={character.life === 0}>
