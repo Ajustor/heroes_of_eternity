@@ -6,8 +6,4 @@ export default defineConfig({
   dialect: 'postgresql', // 'postgresql' | 'mysql' | 'sqlite'
   verbose: true,
   strict: true,
-  migrations: {
-    table: 'migrations',
-    schema: 'public',
-  }
 })

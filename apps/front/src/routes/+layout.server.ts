@@ -8,19 +8,20 @@ import type { LayoutServerLoad } from './$types'
 
 export const load: LayoutServerLoad = async ({ cookies, url }) => {
   const isLogged = !!cookies.get('auth')
+  const authToken = cookies.get('auth')
   let user: User | null = null
-  if (isLogged) {
+  if (isLogged && authToken) {
     try {
-      user = await getUser(cookies)
+      user = { ...(await getUser(cookies)), token: authToken }
     } catch (error) {
-      console.error('An error occured in the layout', ...error)
+      console.error('An error occured in the layout', error)
     }
   }
 
   return {
     url: url.pathname,
-    isLogged,
+    isLogged: !!user,
     user,
-    authToken: cookies.get('auth')
+    authToken
   }
 }

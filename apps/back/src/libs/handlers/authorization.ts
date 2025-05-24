@@ -3,10 +3,11 @@ import { User } from '@hoe/db'
 import { bearer } from '@elysiajs/bearer'
 import { validateUser } from '../jwt'
 
+
 export const authorization = (message: string) => {
   return new Elysia()
     .use(bearer())
-    .derive({ as: 'scoped' }, async ({ cookie: { auth }, status, bearer }) => {
+    .derive({ as: 'scoped', }, async ({ cookie: { auth }, status, bearer }) => {
       const token = auth.value ?? bearer
 
       if (!token) {
@@ -18,6 +19,7 @@ export const authorization = (message: string) => {
       if (!user) {
         return status(401, message)
       }
+
       return { user }
     })
 }

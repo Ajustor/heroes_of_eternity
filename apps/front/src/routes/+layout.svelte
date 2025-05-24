@@ -4,13 +4,17 @@
 	import { toast, Toaster } from 'svelte-sonner'
 	import Icon from '@iconify/svelte'
 	import { page } from '$app/stores'
+	import { chatStore } from '../stores/chat.svelte'
+	import ChatModal from '$lib/components/chat/ChatModal.svelte'
 
 	let { children, data } = $props()
 
 	let user = userStore()
+	let chat = chatStore()
 
 	if (data.isLogged) {
 		user.value = data.user
+		chat.connect()
 	}
 
 	let isDrawerOpen = $state(false)
@@ -26,6 +30,7 @@
 </script>
 
 <Toaster position="bottom-right" richColors closeButton expand />
+<ChatModal />
 
 {#snippet navbar()}
 	<li><a href="/" class="flex items-center gap-4"><Icon icon="iconamoon:home" /> Accueil</a></li>
@@ -48,10 +53,18 @@
 		<label for="my-drawer" class="btn btn-primary drawer-button lg:hidden">
 			<Icon icon="iconamoon:menu-burger-horizontal-bold" />
 		</label>
-		<div class="hidden flex-none lg:block">
+		<div class="flex hidden justify-between lg:block">
 			<ul class="menu menu-horizontal">
 				{@render navbar()}
 			</ul>
+			{#if user.value?.id}
+				<!-- content here -->
+				<a href="/users/{user.value?.id}">
+					{user.value.username}
+				</a>
+			{:else}
+				<a href="/login">Se connecter</a>
+			{/if}
 		</div>
 	</div>
 	<div class="drawer-side bg-base-200 text-base-content min-h-full">
