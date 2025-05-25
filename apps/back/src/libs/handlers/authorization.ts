@@ -9,7 +9,7 @@ export const authorization = (message: string) => {
     .use(bearer())
     .derive({ as: 'scoped', }, async ({ cookie: { auth }, status, bearer, route, headers }) => {
       const token = auth.value ?? bearer
-      console.log('Check auth on route:', route, headers)
+
       if (!token) {
         return status(401, message)
       }
