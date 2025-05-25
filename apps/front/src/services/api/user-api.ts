@@ -2,34 +2,35 @@ import type { Cookies } from '@sveltejs/kit'
 import { client } from './client'
 
 export async function login(username: string, password: string, cookies: Cookies) {
-  console.log('LOGIN function',)
-  const { headers, error } = await client.auth.post({ username, password }).catch((error) => {
-    console.error('c\'est pété', error)
-    return { error, headers: { entries: () => [] } }
-  })
+  console.log('LOGIN function')
+  try {
+    const { headers, error } = await client.auth.post({ username, password })
 
-  if (error) {
-    console.error(error)
+    if (error) {
+      console.error(error)
+      throw error
+    }
+
+    const headersEntries = (headers?.entries as CallableFunction)()
+
+    for (const [key, value] of headersEntries) {
+      if (key === 'set-cookie') {
+        const [valueWithKey, path, expires] = value.split('; ')
+        const [key, cookieValue] = valueWithKey.split('=')
+        const [, parsedPath] = path.split('=')
+
+        cookies.set(key.trim(), cookieValue, {
+          path: parsedPath,
+          expires: new Date(expires),
+          secure: false,
+          httpOnly: false,
+        })
+      }
+    }
+  } catch (error) {
+    console.error('An error occured', error)
     throw error
   }
-
-  const headersEntries = (headers?.entries as CallableFunction)()
-
-  for (const [key, value] of headersEntries) {
-    if (key === 'set-cookie') {
-      const [valueWithKey, path, expires] = value.split('; ')
-      const [key, cookieValue] = valueWithKey.split('=')
-      const [, parsedPath] = path.split('=')
-
-      cookies.set(key.trim(), cookieValue, {
-        path: parsedPath,
-        expires: new Date(expires),
-        secure: false,
-        httpOnly: false,
-      })
-    }
-  }
-
 }
 
 export async function getUser(cookies: Cookies) {
