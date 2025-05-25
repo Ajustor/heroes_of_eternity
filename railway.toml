@@ -24,6 +24,10 @@ services = [
       DATABASE_PASSWORD = "${{Postgres.PGPASSWORD}}",
       DATABASE_PORT = "${{Postgres.PGPORT}}",
       NODE_ENV = "production"
+    },
+    build = {
+      builder = "NIXPACKS",
+      buildCommand = "bun i  && bun run build:deps"
     }
   },
   {
@@ -35,6 +39,10 @@ services = [
       PUBLIC_BACK_URL = "http://${{back.RAILWAY_PRIVATE_DOMAIN}}",
       PUBLIC_BACK_WS_URL = "http://${{back.RAILWAY_PUBLIC_DOMAIN}}",
       NODE_ENV = "production"
+    },
+    build = {
+      builder = "NIXPACKS",
+      buildCommand = "bun i  && bun run build:deps && bun run build:front"
     }
   }
 ]

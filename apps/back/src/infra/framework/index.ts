@@ -14,7 +14,12 @@ const app = new Elysia()
   .use(cors())
   .use(swagger({ version }))
   .get('/', () => 'Hello Elysia')
-  .use(logger())
+  .use(logger({
+    mode: 'live',
+    enabled: true,
+    withBanner: true,
+    withTimestamp: true,
+  }))
   .use(usersModule)
   .use(authModule)
   .use(charactersModule)
