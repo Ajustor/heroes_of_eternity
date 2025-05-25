@@ -2,6 +2,7 @@ import type { Cookies } from '@sveltejs/kit'
 import { client } from './client'
 
 export async function login(username: string, password: string, cookies: Cookies) {
+  console.log('LOGIN function')
   const { headers, error } = await client.auth.post({ username, password })
 
   if (error) {
