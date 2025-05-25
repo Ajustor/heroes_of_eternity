@@ -32,7 +32,7 @@ services = [
     port = 5173,
     path = "apps/front",
     env = {
-      PUBLIC_BACK_URL = "http://${{BACKEND_HOST}}:3000",
+      PUBLIC_BACK_URL = "http://${{back.RAILWAY_PRIVATE_DOMAIN}}:3000",
       NODE_ENV = "production"
     }
   }
