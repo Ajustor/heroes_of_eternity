@@ -17,7 +17,10 @@ export const authModule = new Elysia({ prefix: 'auth' })
   }))
   .use(jwtMiddleware)
   .post('', async ({ body, loginUsecase, cookie: { auth }, set, jwt }) => {
-    const user = await loginUsecase.execute(body)
+    const user = await loginUsecase.execute(body).catch((error) => {
+      console.error(error)
+    })
+
     if (!user) {
       set.status = 404
       throw new NotFoundError('User not found')
