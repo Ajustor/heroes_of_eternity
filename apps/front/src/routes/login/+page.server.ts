@@ -22,7 +22,13 @@ export const actions: Actions = {
         form,
       })
     }
-    await login(form.data.username, form.data.password, cookies).catch(error => message(form, { status: 'error', text: 'Aucun utilisateur trouvé pour ces informations de connexion' }, error))
+    try {
+      await login(form.data.username, form.data.password, cookies)
+    } catch (error) {
+      console.error(error)
+      return message(form, { status: 'error', text: 'Aucun utilisateur trouvé pour ces informations de connexion' }, error)
+    }
+
     const redirectTo = url.searchParams.get('redirectTo')
     if (redirectTo) {
       return redirect(302, `/${redirectTo.slice(1)}`)

@@ -22,7 +22,7 @@
 		"@eslint/js": "^9.27.0",
 		"@hoe/db": "workspace:*",
 		"@hoe/server": "workspace:*",
-		"@sveltejs/adapter-node": "5.2.9",
+		"@sveltejs/adapter-node": "5.2.12",
 		"@sveltejs/kit": "2.20.7",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tailwindcss/typography": "^0.5.16",
