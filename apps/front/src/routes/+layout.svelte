@@ -3,6 +3,7 @@
 	import { userStore } from '../stores/user'
 	import { toast, Toaster } from 'svelte-sonner'
 	import Icon from '@iconify/svelte'
+	import { onMount } from 'svelte'
 	import { page } from '$app/stores'
 	import { chatStore } from '../stores/chat.svelte'
 	import ChatModal from '$lib/components/chat/ChatModal.svelte'
@@ -14,8 +15,13 @@
 
 	if (data.isLogged) {
 		user.value = data.user
-		chat.connect()
 	}
+
+	onMount(() => {
+		if (data.isLogged) {
+			chat.connect()
+		}
+	})
 
 	let isDrawerOpen = $state(false)
 	const close = () => {
