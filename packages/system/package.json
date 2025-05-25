@@ -1,0 +1,31 @@
+{
+  "name": "@hoe/system",
+  "module": "dist/index.js",
+  "types": "src/index.ts",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./src/index.ts"
+    },
+    "./constants": {
+      "import": "./dist/constants/index.js",
+      "require": "./dist/constants/index.js",
+      "types": "./src/constants/index.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build --outdir=dist --minify --splitting src/index.ts --target=bun && bun build --outdir=dist/constants --minify --splitting src/constants/index.ts --target=bun"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

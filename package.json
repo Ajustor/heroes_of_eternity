@@ -9,11 +9,18 @@
   ],
   "scripts": {
     "build:front": "(cd apps/front && bun run build)",
+    "build:back": "(cd apps/back && bun run build)",
     "start:back": "(cd apps/back && bun run dev)",
     "dev:front": "(cd apps/front && bun run dev)",
-    "start:front": "(cd apps/front && bun run start)"
+    "start:front": "(cd apps/front && bun run start)",
+    "build:deps": "(cd packages/assets && bun run build) && (cd packages/system && bun run build) && (cd packages/db && bun run build)",
+    "generate:migrations": "(cd packages/db && bun run generate:migrations)",
+    "migrate": "(cd packages/db && bun run migration)"
   },
   "dependencies": {
-    "drizzle-typebox": "^0.3.0"
+    "@elysiajs/swagger": "^1.3.0",
+    "@tailwindcss/vite": "^4.1.7",
+    "drizzle-typebox": "^0.3.3",
+    "tailwindcss": "^4.1.7"
   }
 }
