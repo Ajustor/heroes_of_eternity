@@ -9,6 +9,7 @@ import type { LayoutServerLoad } from './$types'
 export const load: LayoutServerLoad = async ({ cookies, url }) => {
   const isLogged = !!cookies.get('auth')
   const authToken = cookies.get('auth')
+  console.log(authToken, isLogged)
   let user: User | null = null
   if (isLogged && authToken) {
     try {
