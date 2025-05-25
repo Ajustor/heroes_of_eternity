@@ -2,8 +2,11 @@ import type { Cookies } from '@sveltejs/kit'
 import { client } from './client'
 
 export async function login(username: string, password: string, cookies: Cookies) {
-  console.log('LOGIN function')
-  const { headers, error } = await client.auth.post({ username, password })
+  console.log('LOGIN function',)
+  const { headers, error } = await client.auth.post({ username, password }).catch((error) => {
+    console.error('c\'est pété', error)
+    return { error, headers: { entries: () => [] } }
+  })
 
   if (error) {
     console.error(error)
