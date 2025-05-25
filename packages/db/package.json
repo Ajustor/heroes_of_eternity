@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "generate:migrations": "bunx drizzle-kit generate",
-    "migration": "bun run migrations.ts",
+    "migration": "bun drizzle-kit migrate",
     "build": "bun build --outdir=dist --minify --splitting src/index.ts --target=bun"
   },
   "devDependencies": {

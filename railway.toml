@@ -27,12 +27,13 @@ services = [
     }
   },
   {
-    name = "frontend" ,
+    name = "frontend",
     type = "nodejs",
     port = 5173,
     path = "apps/front",
     env = {
-      PUBLIC_BACK_URL = "http://${{back.RAILWAY_PRIVATE_DOMAIN}}:3000",
+      PUBLIC_BACK_URL = "http://${{back.RAILWAY_PRIVATE_DOMAIN}}",
+      PUBLIC_BACK_WS_URL = "http://${{back.RAILWAY_PUBLIC_DOMAIN}}",
       NODE_ENV = "production"
     }
   }

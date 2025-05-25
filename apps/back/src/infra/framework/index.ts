@@ -8,11 +8,13 @@ import { version } from '../../../package.json'
 
 import swagger from '@elysiajs/swagger'
 import cors from '@elysiajs/cors'
+import { logger } from "@tqman/nice-logger"
 
 const app = new Elysia()
   .use(cors())
   .use(swagger({ version }))
   .get('/', () => 'Hello Elysia')
+  .use(logger())
   .use(usersModule)
   .use(authModule)
   .use(charactersModule)
