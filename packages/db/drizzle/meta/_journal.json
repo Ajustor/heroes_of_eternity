@@ -15,6 +15,20 @@
       "when": 1748235190960,
       "tag": "0001_strange_wild_pack",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1748259159088,
+      "tag": "0002_past_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1748264864823,
+      "tag": "0003_curved_firelord",
+      "breakpoints": true
     }
   ]
 }

@@ -28,11 +28,19 @@
     "moduleResolution": "node" /* Specify how TypeScript looks up a file from a given module specifier. */,
     "baseUrl": "./",
     "paths": {
-      "@/core/*": ["./src/core/*"],
-      "@/infra/*": ["./src/infra/*"],
-      "@/libs/*": ["./src/libs/*"],
-      "@/shared/*": ["./src/shared/*"],
-      "@/use-cases/*": ["./src/use-cases/*"]
+      "@/core/*": [
+        "./src/core/*"
+      ],
+      "@/infra/*": [
+        "./src/infra/*"
+      ],
+      "@/libs/*": [
+        "./src/libs/*"
+      ],
+      "@/shared/*": [
+        "./src/shared/*"
+      ]
+      // "@/use-cases/*": ["./src/use-cases/*"]
     } /* Specify a set of entries that re-map imports to additional lookup locations. */,
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

@@ -36,13 +36,21 @@
 </script>
 
 <Toaster position="bottom-right" richColors closeButton expand />
-<ChatModal />
+
+{#if data.isLogged}
+	<ChatModal />
+{/if}
 
 {#snippet navbar()}
 	<li><a href="/" class="flex items-center gap-4"><Icon icon="iconamoon:home" /> Accueil</a></li>
 	<li>
 		<a href="/characters" class="flex items-center">
 			<Icon icon="game-icons:character" /> Personnages
+		</a>
+	</li>
+	<li>
+		<a href="/beasts" class="flex items-center">
+			<Icon icon="game-icons:character" /> Bestiaire
 		</a>
 	</li>
 {/snippet}
@@ -59,7 +67,7 @@
 		<label for="my-drawer" class="btn btn-primary drawer-button lg:hidden">
 			<Icon icon="iconamoon:menu-burger-horizontal-bold" />
 		</label>
-		<div class="flex hidden justify-between lg:block">
+		<div class="hidden justify-between lg:flex">
 			<ul class="menu menu-horizontal">
 				{@render navbar()}
 			</ul>
