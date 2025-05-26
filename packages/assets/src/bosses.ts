@@ -6,8 +6,8 @@ export enum BOSSES_KEYS {
 
 export const BOSSES = new Map(
   [
-    [BOSSES_KEYS.Chaos, `assets/characters/boss1.png`],
-    [BOSSES_KEYS.Troll, `assets/characters/boss2.png`],
-    [BOSSES_KEYS.DarkLord, `assets/characters/boss3.png`],
+    [BOSSES_KEYS.Chaos, `assets/bosses/boss1.png`],
+    [BOSSES_KEYS.Troll, `assets/bosses/boss2.png`],
+    [BOSSES_KEYS.DarkLord, `assets/bosses/boss3.png`],
   ]
 )
