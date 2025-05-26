@@ -3,21 +3,28 @@ import { usersModule } from './modules/users'
 import { authModule } from './modules/auth'
 import { charactersModule } from './modules/characters'
 import { chatModule } from './modules/chat'
-import { beastsModule } from './modules/beasts'
 
 import { version } from '../../../package.json'
 
 import swagger from '@elysiajs/swagger'
 import cors from '@elysiajs/cors'
+import { logger } from "@tqman/nice-logger"
+import { beastsModule } from './modules/beasts'
 
 const app = new Elysia()
   .use(cors())
   .use(swagger({ version }))
-  .get('/', () => 'Hello there')
+  .get('/', () => 'Hello There')
+  .use(logger({
+    mode: 'live',
+    enabled: true,
+    withBanner: true,
+    withTimestamp: true,
+  }))
   .use(usersModule)
   .use(authModule)
-  .use(chatModule)
   .use(charactersModule)
+  .use(chatModule)
   .use(beastsModule)
   .listen(process.env.PORT ?? 3000)
 
