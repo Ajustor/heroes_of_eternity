@@ -1,12 +1,19 @@
 import { Elysia, t } from "elysia"
-import { authorization } from '../../../../libs/handlers/authorization'
 import { validateUser } from "@/libs/jwt"
+import bearer from "@elysiajs/bearer"
 
 export type ChatMessage = { username: string, id: string, message: string }
 
 
 export const chatModule = new Elysia({ prefix: 'chat' })
-    .use(authorization('You need to be connected to chat'))
+    .use(bearer())
+    .derive({ as: 'scoped', }, async ({ cookie: { auth }, bearer }) => {
+        const token = auth.value ?? bearer
+        const user = validateUser(token)
+
+
+        return { user }
+    })
     .ws('', {
         body: t.Object({
             message: t.String(),
@@ -34,12 +41,14 @@ export const chatModule = new Elysia({ prefix: 'chat' })
                 ws.data = { ...ws.data, user }
             }
 
-            if (!ws.data.user && !body.accessToken) {
+            const { user } = ws.data
+
+            if (!user || (!body.accessToken && !user)) {
                 ws.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
                 return
             }
 
-            ws.publish('global', { message: body.message, username: ws.data.user.username })
-            ws.send({ message: body.message, username: ws.data.user.username })
+            ws.publish('global', { message: body.message, username: user.username })
+            ws.send({ message: body.message, username: user.username })
         }
     })
