@@ -8,7 +8,7 @@ export enum BEASTS_KEYS {
   Spider = 'Spider',
 }
 
-export const BOSSES = new Map(
+export const BEASTS = new Map(
   [
     [BEASTS_KEYS.Bat, `assets/beasts/Bat.png`],
     [BEASTS_KEYS.Rat, `assets/beasts/Rat.png`],
