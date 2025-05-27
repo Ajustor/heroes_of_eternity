@@ -7,11 +7,11 @@ export type Chat = ChatMessage[]
 
 const chatData = (defaultChat: Chat) => rune<Chat>(defaultChat, 'chat')
 let chatApi = $state<ChatApi | null>(null)
+let isConnected = $state(false)
 
 export const chatStore = () => {
     let user = userStore()
     let chat = chatData([])
-
 
     function onMessage(message: ChatMessage) {
         if (message.message === 'NOT_AUTHENTICATED') {
@@ -22,7 +22,7 @@ export const chatStore = () => {
     }
 
     function sendMessage(message: string) {
-        if (!chatApi) {
+        if (!isConnected || !chatApi) {
             throw new Error('Chat is not connected')
         }
         chatApi.send({ message })
@@ -36,6 +36,15 @@ export const chatStore = () => {
         chatApi = connectChat()
         chatApi.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
         chatApi.on('message', (message) => onMessage(message.data))
+        chatApi.on('open', () => {
+            console.log('Chat connected')
+            isConnected = true
+        })
+
+        chatApi.on('close', () => {
+            console.log('Chat closed')
+            isConnected = false
+        })
     }
 
     return {
