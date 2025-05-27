@@ -1,19 +1,14 @@
 import { Elysia, t } from "elysia"
 import { validateUser } from "@/libs/jwt"
 import bearer from "@elysiajs/bearer"
+import { authorization } from "../../../../libs/handlers/authorization"
 
 export type ChatMessage = { username: string, id: string, message: string }
 
 
 export const chatModule = new Elysia({ prefix: 'chat' })
     .use(bearer())
-    .derive({ as: 'scoped', }, async ({ cookie: { auth }, bearer }) => {
-        const token = auth.value ?? bearer
-        const user = validateUser(token)
-
-
-        return { user }
-    })
+    .use(authorization('You need to be connected to chat'))
     .ws('', {
         body: t.Object({
             message: t.String(),
@@ -26,6 +21,7 @@ export const chatModule = new Elysia({ prefix: 'chat' })
         }),
         open(ws) {
             if (!ws.data.user) {
+                console.info('User is not authenticated start authentication process')
                 ws.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
             }
         },
@@ -34,6 +30,8 @@ export const chatModule = new Elysia({ prefix: 'chat' })
             if (body.accessToken) {
                 const user = validateUser(body.accessToken)
                 if (!user) {
+                    console.info('User is not authenticated start authentication process')
+
                     ws.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
                     return
                 }
@@ -44,6 +42,7 @@ export const chatModule = new Elysia({ prefix: 'chat' })
             const { user } = ws.data
 
             if (!user || (!body.accessToken && !user)) {
+                console.info('User is not authenticated start authentication process')
                 ws.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
                 return
             }
