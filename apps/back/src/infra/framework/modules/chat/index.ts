@@ -31,7 +31,6 @@ export const chatModule = new Elysia({ prefix: 'chat' })
                 const user = validateUser(body.accessToken)
                 if (!user) {
                     console.info('User is not authenticated start authentication process')
-
                     ws.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
                     return
                 }

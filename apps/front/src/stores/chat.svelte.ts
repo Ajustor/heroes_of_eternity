@@ -33,7 +33,8 @@ export const chatStore = () => {
             throw new Error('User is not logged')
         }
 
-        chatApi = connectChat(user.value?.token ?? '')
+        chatApi = connectChat()
+        chatApi.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
         chatApi.on('message', (message) => onMessage(message.data))
     }
 
