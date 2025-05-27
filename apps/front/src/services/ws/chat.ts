@@ -7,6 +7,13 @@ export function connectChat(token: string) {
 
     const chat = wsClient.chat.subscribe()
 
-    console.log('Chat connected')
+    chat.on('open', () => {
+        console.log('Chat connected')
+    })
+
+    chat.on('close', () => {
+        console.log('Chat closed')
+    })
+
     return chat
 }
