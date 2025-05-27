@@ -4,6 +4,8 @@
 	import Icon from '@iconify/svelte'
 	import { page } from '$app/stores'
 
+	let { disabled } = $props()
+
 	let isOpen = $state(false)
 	let chat = chatStore()
 	let user = userStore()
@@ -33,6 +35,7 @@
 <div class="fixed right-4 bottom-4 z-50">
 	<!-- Toggle Button -->
 	<button
+		{disabled}
 		onclick={() => (isOpen = !isOpen)}
 		class="rounded-full bg-blue-500 p-4 font-bold text-white transition-all duration-300 hover:bg-blue-700"
 	>

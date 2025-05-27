@@ -38,7 +38,7 @@
 <Toaster position="bottom-right" richColors closeButton expand />
 
 {#if data.isLogged}
-	<ChatModal />
+	<ChatModal disabled={!chat.isConnected} />
 {/if}
 
 {#snippet navbar()}

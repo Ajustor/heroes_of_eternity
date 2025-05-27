@@ -34,10 +34,10 @@ export const chatStore = () => {
         }
 
         chatApi = connectChat()
-        chatApi.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
         chatApi.on('message', (message) => onMessage(message.data))
         chatApi.on('open', () => {
             console.log('Chat connected')
+            chatApi?.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
             isConnected = true
         })
 
@@ -48,6 +48,9 @@ export const chatStore = () => {
     }
 
     return {
+        get isConnected() {
+            return isConnected
+        },
         get value() {
             return chat.value
         },
