@@ -1,12 +1,11 @@
 import { Elysia, t } from "elysia"
 import { PostgresCharacterRepository } from "../../data/postgres/character.repository"
-import { db } from '@/infra/framework/data/postgres/database'
-import { CreateCharacterUseCase } from "@/use-cases/character/create/create-character.use-case"
+import { db } from '../../data/postgres/database'
+import { CreateCharacterUseCase } from "../../../../use-cases/character/create/create-character.use-case"
 import { authorization } from '../../../../libs/handlers/authorization'
-import { ListCharactersUseCase } from "@/use-cases/character/list/list-characters.use-case"
-import { OPERATOR } from "../../../../core/domain/repositories/base.repository"
+import { ListCharactersUseCase } from "../../../../use-cases/character/list/list-characters.use-case"
 
-export const charactersModule = new Elysia({ prefix: '/characters' })
+export const charactersModule = new Elysia({ prefix: 'characters' })
   .decorate({ characterRepository: new PostgresCharacterRepository(db) })
   .decorate(({ characterRepository }) => {
     return {

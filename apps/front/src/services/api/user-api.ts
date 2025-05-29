@@ -2,7 +2,6 @@ import type { Cookies } from '@sveltejs/kit'
 import { client } from './client'
 
 export async function login(username: string, password: string, cookies: Cookies) {
-  console.log('LOGIN function')
   try {
     const { headers, error } = await client.auth.post({ username, password })
 
@@ -67,7 +66,6 @@ export async function askPasswordLink(email: string) {
 }
 
 export async function createNewUser(email: string, password: string, username: string) {
-  console.log('create new user')
   const { error } = await client.users.post({ email, password, username })
 
   if (error) {

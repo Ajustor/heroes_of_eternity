@@ -1,13 +1,13 @@
 import { Elysia, NotFoundError, t } from 'elysia'
 import { authorization } from '../../../../libs/handlers/authorization'
 import { PostgresUserRepository } from '../../data/postgres/user.repository'
-import { GetUsersUseCase } from '@/use-cases/user/get-users/get-users'
-import { CreateUserUseCase } from '@/use-cases/user/create-user/create-user'
-import { ResetPasswordUseCase } from '@/use-cases/user/reset-password/reset-password'
-import { GetUserUseCase } from '@/use-cases/user/get-user/get-user'
-import { UpdatePasswordUseCase } from '@/use-cases/user/update-password/update-password'
-import { db } from '@/infra/framework/data/postgres/database'
-import { SecurityService } from '@/core/domain/secutiry.service'
+import { GetUsersUseCase } from '../../../../use-cases/user/get-users/get-users'
+import { CreateUserUseCase } from '../../../../use-cases/user/create-user/create-user'
+import { ResetPasswordUseCase } from '../../../../use-cases/user/reset-password/reset-password'
+import { GetUserUseCase } from '../../../../use-cases/user/get-user/get-user'
+import { UpdatePasswordUseCase } from '../../../../use-cases/user/update-password/update-password'
+import { db } from '../../data/postgres/database'
+import { SecurityService } from '../../../../core/domain/secutiry.service'
 
 export const usersModule = new Elysia({ prefix: 'users', name: 'users' })
   .decorate({ usersRepository: new PostgresUserRepository(db) })
