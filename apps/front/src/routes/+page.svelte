@@ -2,7 +2,7 @@
 </script>
 
 <div class="m-auto flex h-full w-3/4 flex-col items-center justify-center">
-	<h1>Heroes of Eternity</h1>
+	<h1 class="text-3xl">Heroes of Eternity</h1>
 	<div class="mx-auto max-w-4xl">
 		<p class="mb-4 text-xl">
 			Bienvenue dans Heroes of Eternity, un RPG en ligne où chaque aventure est unique. Créez votre

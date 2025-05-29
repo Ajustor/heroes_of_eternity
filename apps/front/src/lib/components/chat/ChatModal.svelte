@@ -35,9 +35,10 @@
 <div class="fixed right-4 bottom-4 z-50">
 	<!-- Toggle Button -->
 	<button
-		{disabled}
 		onclick={() => (isOpen = !isOpen)}
 		class="rounded-full bg-blue-500 p-4 font-bold text-white transition-all duration-300 hover:bg-blue-700"
+		class:bg-red-500={disabled}
+		class:hover:bg-red-500={disabled}
 	>
 		<Icon icon="solar:letter-bold" class="h-6 w-6" />
 	</button>
@@ -88,6 +89,7 @@
 							class="flex-1 rounded-lg border p-2 text-black focus:ring-2 focus:ring-blue-500 focus:outline-none"
 						/>
 						<button
+							{disabled}
 							onclick={sendMessage}
 							class="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-700"
 						>
