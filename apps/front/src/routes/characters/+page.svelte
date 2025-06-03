@@ -64,7 +64,7 @@
 {/snippet}
 
 <div class="m-auto flex h-full w-3/4 flex-col items-center justify-center">
-	<h1>Mes personnages</h1>
+	<h1 class="text-5xl">Mes personnages</h1>
 
 	{@render createCharacterForm()}
 
