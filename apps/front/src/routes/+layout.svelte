@@ -50,7 +50,7 @@
 	</li>
 	<li>
 		<a href="/beasts" class="flex items-center">
-			<Icon icon="game-icons:character" /> Bestiaire
+			<Icon icon="fa6-brands:optin-monster" /> Bestiaire
 		</a>
 	</li>
 {/snippet}
