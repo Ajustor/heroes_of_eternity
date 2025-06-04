@@ -26,13 +26,13 @@ export async function listCharacters() {
 }
 
 
-export async function listMyCharacters(cookies: Cookies) {
+export async function listMyCharacters(cookies: Cookies, userId: string) {
     const { data: characters, error } = await client.characters.get({
         headers: {
             authorization: `Bearer ${cookies.get(('auth'))}`
         },
         query: {
-            userId: cookies.get(('userId'))
+            userId
         }
     })
 
