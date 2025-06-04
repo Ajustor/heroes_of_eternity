@@ -30,6 +30,12 @@
 			chat.send(`Error: ${error.message}`)
 		}
 	})
+
+	$effect(() => {
+		if (isOpen && !chat.isConnected) {
+			chat.connect()
+		}
+	})
 </script>
 
 <div class="fixed right-4 bottom-4 z-50">
@@ -79,7 +85,6 @@
 					{/if}
 				</div>
 
-				<!-- Input -->
 				<div class="border-t p-4">
 					<div class="flex gap-2">
 						<input
@@ -90,6 +95,8 @@
 						/>
 						<button
 							{disabled}
+							class:bg-red-500={disabled}
+							class:hover:bg-red-500={disabled}
 							onclick={sendMessage}
 							class="rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-700"
 						>
