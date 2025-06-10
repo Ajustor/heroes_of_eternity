@@ -1,6 +1,6 @@
 import { UsersRepository } from '@/core/domain/repositories/users.repository'
 import { UsersCacheMemoryRepository } from '@/infra/framework/data/cache-memory/users-cache-memory.repository'
-import { ResetPasswordUseCase } from '@/use-cases/user/reset-password/reset-password'
+import { ResetPasswordUseCase } from './reset-password'
 import { beforeEach, describe, it, expect } from 'bun:test'
 
 describe('ResetPasswordUseCase', () => {
