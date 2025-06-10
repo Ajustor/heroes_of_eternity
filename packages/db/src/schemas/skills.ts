@@ -3,7 +3,7 @@ import { createId } from '@paralleldrive/cuid2'
 import { createInsertSchema } from 'drizzle-typebox'
 import { SKILLS_KEYS } from "@hoe/assets"
 
-export const skillsSkinEnum = pgEnum('skills_skin', [SKILLS_KEYS.HEAL, SKILLS_KEYS.BLOW, SKILLS_KEYS.DARKNESS])
+export const skillsSkinEnum = pgEnum('skills_skin', [SKILLS_KEYS.HEAL, SKILLS_KEYS.DARKNESS])
 
 export const skillsTable = pgTable('skills_table', {
     id: text('id').primaryKey().$defaultFn(createId).notNull(),
