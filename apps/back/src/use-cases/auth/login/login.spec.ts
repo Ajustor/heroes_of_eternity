@@ -2,7 +2,7 @@ import { UsersRepository } from '@/core/domain/repositories/users.repository'
 import { UsersCacheMemoryRepository } from '@/infra/framework/data/cache-memory/users-cache-memory.repository'
 import { beforeEach, describe, it, expect, mock } from 'bun:test'
 import { UserCreation, UserEntity } from '@hoe/db'
-import { LoginUsecase } from '@/use-cases/auth/login/login'
+import { LoginUsecase } from './login'
 import { Security } from '@/core/base/security'
 
 describe('LoginUsecase', () => {
