@@ -4,6 +4,8 @@ import { usersTable } from './user'
 import { createId } from '@paralleldrive/cuid2'
 import { CHARACTERS_KEYS } from '@hoe/assets'
 import { JOBS } from '@hoe/system/constants'
+import { relations } from 'drizzle-orm'
+import { skillsTable } from './skills'
 
 export const charactersSkinEnum = pgEnum('characters_skin', [CHARACTERS_KEYS.Claude, CHARACTERS_KEYS.Eric, CHARACTERS_KEYS.Jane, CHARACTERS_KEYS.Serge])
 export const charactersJobEnum = pgEnum('characters_job', [JOBS.FREELANCE])
@@ -27,6 +29,10 @@ export const charactersTable = pgTable('characters_table', {
   dexterity: integer().notNull(),
   experience: integer().default(0),
 })
+
+export const characterSkillsRelations = relations(charactersTable, ({ many }) => ({
+  skills: many(skillsTable),
+}))
 
 export type CharacterEntity = typeof charactersTable.$inferSelect
 export type CharacterCreation = typeof charactersTable.$inferInsert
