@@ -2,7 +2,6 @@ import { pgTable, text, integer, pgEnum } from 'drizzle-orm/pg-core'
 import { createId } from '@paralleldrive/cuid2'
 import { createInsertSchema } from 'drizzle-typebox'
 import { SKILLS_KEYS } from "@hoe/assets"
-import { charactersJobEnum } from './character'
 
 export const skillsSkinEnum = pgEnum('skills_skin', [SKILLS_KEYS.HEAL, SKILLS_KEYS.BLOW, SKILLS_KEYS.DARKNESS])
 
@@ -14,7 +13,6 @@ export const skillsTable = pgTable('skills_table', {
     cost: integer().notNull(),
     animation: skillsSkinEnum().notNull(),
     requiredLevel: integer('required_level').notNull(),
-    job: charactersJobEnum().notNull(),
 })
 
 export type SkillEntity = typeof skillsTable.$inferSelect
