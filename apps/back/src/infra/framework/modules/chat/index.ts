@@ -2,8 +2,18 @@ import { Elysia, t } from "elysia"
 import { validateUser } from "@/libs/jwt"
 import bearer from "@elysiajs/bearer"
 import { authorization } from "../../../../libs/handlers/authorization"
+import { Server } from "socket.io"
+import { createServer } from 'http'
 
 export type ChatMessage = { username: string, id: string, message: string }
+
+export const initWebsocketServer = (port: number) => {
+    const io = new Server(port)
+
+    io.on('connection', (socket) => {
+        console.info('User connected')
+    })
+}
 
 
 export const chatModule = new Elysia({ prefix: 'chat' })

@@ -6,7 +6,7 @@ export function connectChat(token: string) {
     const chat = client.chat.subscribe({
         headers: {
             authorization: `Bearer ${token}`
-        }
+        },
     })
 
     return chat

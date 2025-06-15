@@ -7,3 +7,12 @@ export const client = treaty<App>(PUBLIC_BACK_URL, {
     credentials: 'include'
   }
 })
+<<<<<<< HEAD
+=======
+
+export const wsClient = treaty<App>(PUBLIC_BACK_WS_URL, {
+  fetch: {
+    credentials: 'include'
+  },
+})
+>>>>>>> f159038 (Feat(sockets): start replacing sockets)
