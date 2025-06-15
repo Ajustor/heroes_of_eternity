@@ -43,6 +43,13 @@
       "when": 1749555321861,
       "tag": "0005_tiresome_rattler",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1749966077738,
+      "tag": "0006_long_robin_chapel",
+      "breakpoints": true
     }
   ]
 }
