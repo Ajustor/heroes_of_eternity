@@ -11,5 +11,5 @@ export const client = treaty<App>(PUBLIC_BACK_URL, {
 export const wsClient = treaty<App>(PUBLIC_BACK_WS_URL, {
   fetch: {
     credentials: 'include'
-  }
+  },
 })
