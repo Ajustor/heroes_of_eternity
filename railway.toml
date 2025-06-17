@@ -50,8 +50,8 @@ services = [
     port = 5173,
     path = "apps/front",
     env = {
-      PUBLIC_BACK_URL = "${{back.RAILWAY_PRIVATE_DOMAIN}}",
-      PUBLIC_BACK_WS_URL = "${{back.RAILWAY_PUBLIC_DOMAIN}}",
+      PUBLIC_BACK_URL = "${{back.RAILWAY_PUBLIC_DOMAIN}}",
+      PUBLIC_BACK_WS_URL = "${{sockets.RAILWAY_PUBLIC_DOMAIN}}",
       NODE_ENV = "production"
     },
     build = {
