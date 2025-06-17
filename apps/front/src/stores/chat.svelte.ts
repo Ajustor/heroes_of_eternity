@@ -1,12 +1,14 @@
-import { connectChat, type ChatApi } from '../services/ws/chat'
+import { io, Socket } from "socket.io-client"
+
 import { rune } from './rune.svelte'
 import { userStore } from './user'
+import { PUBLIC_BACK_WS_URL } from "$env/static/public"
 
 export type ChatMessage = { username: string, message: string }
 export type Chat = ChatMessage[]
 
 const chatData = (defaultChat: Chat) => rune<Chat>(defaultChat, 'chat')
-let chatApi = $state<ChatApi | null>(null)
+let chatApi = $state<Socket | null>(null)
 let isConnected = $state(false)
 
 export const chatStore = () => {
@@ -15,7 +17,7 @@ export const chatStore = () => {
 
     function onMessage(message: ChatMessage) {
         if (message.message === 'NOT_AUTHENTICATED') {
-            chatApi?.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
+            chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
             return
         }
         chat.value?.push(message)
@@ -25,7 +27,7 @@ export const chatStore = () => {
         if (!isConnected || !chatApi) {
             throw new Error('Chat is not connected')
         }
-        chatApi.send({ message })
+        chatApi.emit('message', { message })
     }
 
     function connect() {
@@ -33,18 +35,20 @@ export const chatStore = () => {
             throw new Error('User is not logged')
         }
 
-        chatApi = connectChat(user.value.token)
-        chatApi.on('message', (message) => onMessage(message.data))
-        chatApi.on('open', () => {
+        chatApi = io(PUBLIC_BACK_WS_URL)
+        chatApi.on('connect', () => {
             console.log('Chat connected')
-            chatApi?.send({ accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
             isConnected = true
         })
 
-        chatApi.on('close', () => {
+        chatApi.on('message', (response) => onMessage(response))
+
+        chatApi.on('disconnect', () => {
             console.log('Chat closed')
             isConnected = false
         })
+
+        chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
     }
 
     return {

@@ -10,8 +10,10 @@
   "scripts": {
     "build:front": "(cd apps/front && bun run build)",
     "build:back": "(cd apps/back && bun run build)",
+    "build:sockets": "(cd apps/sockets && bun run build)",
     "start:back": "(cd apps/back && bun run dev)",
     "dev:front": "(cd apps/front && bun run dev)",
+    "dev:sockets": "(cd apps/sockets && bun run dev)",
     "start:front": "(cd apps/front && bun run start)",
     "build:deps": "(cd packages/assets && bun run build) && (cd packages/system && bun run build) && (cd packages/db && bun run build)",
     "generate:migrations": "(cd packages/db && bun run generate:migrations)",
