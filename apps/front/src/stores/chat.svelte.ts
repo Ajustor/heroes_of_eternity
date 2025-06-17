@@ -1,8 +1,8 @@
-import { io, Socket } from "socket.io-client";
+import { io, Socket } from "socket.io-client"
 
 import { rune } from './rune.svelte'
 import { userStore } from './user'
-import { PUBLIC_BACK_WS_URL } from "$env/static/public";
+import { PUBLIC_BACK_WS_URL } from "$env/static/public"
 
 export type ChatMessage = { username: string, message: string }
 export type Chat = ChatMessage[]
