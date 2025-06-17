@@ -1,6 +1,6 @@
 import { UsersRepository } from '@/core/domain/repositories/users.repository'
 import { UsersCacheMemoryRepository } from '@/infra/framework/data/cache-memory/users-cache-memory.repository'
-import { GetUsersUseCase } from '@/use-cases/user/get-users/get-users'
+import { GetUsersUseCase } from './get-users'
 import { beforeEach, describe, it, expect } from 'bun:test'
 
 describe('GetUserUseCase', () => {
