@@ -16,7 +16,6 @@ export const chatStore = () => {
     let chat = chatData([])
 
     function onMessage(message: ChatMessage) {
-        console.log('merde', message)
         if (message.message === 'NOT_AUTHENTICATED') {
             chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
             return
@@ -25,7 +24,6 @@ export const chatStore = () => {
     }
 
     function sendMessage(message: string) {
-        console.log('Sending', message, chatApi)
         if (!isConnected || !chatApi) {
             throw new Error('Chat is not connected')
         }
@@ -36,8 +34,6 @@ export const chatStore = () => {
         if (!user.value?.token) {
             throw new Error('User is not logged')
         }
-
-        console.log('Try to connect to ', PUBLIC_BACK_WS_URL)
 
         chatApi = io(PUBLIC_BACK_WS_URL)
         chatApi.on('connect', () => {
