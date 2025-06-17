@@ -2,7 +2,7 @@ services:
   front:
     container_name: heroes-of-eternity_front
     image: oven/bun:slim
-    depends_on: [back]
+    depends_on: [ back ]
     user: bun
     ports:
       - "${DOCKER_FRONT_EXTERNAL_PORT}:8080"
@@ -11,16 +11,30 @@ services:
       - .:/home/bun/app:cached
     command: bun dev
     networks:
-      - heroes-of-eternity 
+      - heroes-of-eternity
 
   back:
     container_name: heroes-of-eternity_back
     image: oven/bun:slim
-    depends_on: [postgres]
+    depends_on: [ postgres ]
     user: bun
     ports:
       - "${DOCKER_BACK_EXTERNAL_PORT}:3000"
     working_dir: /home/bun/app/apps/back
+    volumes:
+      - .:/home/bun/app:cached
+    command: bun dev
+    networks:
+      - heroes-of-eternity
+
+  sockets:
+    container_name: heroes-of-eternity_sockets
+    image: oven/bun:slim
+    depends_on: [ back ]
+    user: bun
+    ports:
+      - "${DOCKER_SOCKET_EXTERNAL_PORT}:3000"
+    working_dir: /home/bun/app/apps/sockets
     volumes:
       - .:/home/bun/app:cached
     command: bun dev
@@ -43,6 +57,7 @@ services:
 
 volumes:
   postgres_data:
+
 
 networks:
   heroes-of-eternity:

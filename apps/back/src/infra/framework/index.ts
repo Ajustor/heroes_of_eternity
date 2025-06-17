@@ -2,7 +2,6 @@ import { Elysia } from 'elysia'
 import { usersModule } from './modules/users'
 import { authModule } from './modules/auth'
 import { charactersModule } from './modules/characters'
-import { chatModule } from './modules/chat'
 
 import { version } from '../../../package.json'
 
@@ -10,7 +9,6 @@ import swagger from '@elysiajs/swagger'
 import cors from '@elysiajs/cors'
 import { logger } from "@tqman/nice-logger"
 import { beastsModule } from './modules/beasts'
-import { initWebsocketServer } from './modules/chat'
 
 const app = new Elysia()
   .use(cors())
@@ -25,11 +23,8 @@ const app = new Elysia()
   .use(usersModule)
   .use(authModule)
   .use(charactersModule)
-  .use(chatModule)
   .use(beastsModule)
   .listen(process.env.PORT ?? 3000)
-
-initWebsocketServer(Number(process.env.PORT ?? 3000))
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`,
