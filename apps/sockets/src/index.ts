@@ -24,6 +24,11 @@ io.on('connect', (socket) => {
     })
 
     socket.on('message', (body) => {
+        if (!socket.data.user) {
+            socket.send({ message: 'NOT_AUTHENTICATED', username: 'Server' })
+            return
+        }
+
         socket.broadcast.emit('message', { message: body.message, username: socket.data.user?.username })
         socket.emit('message', { message: body.message, username: socket.data.user?.username })
     })
