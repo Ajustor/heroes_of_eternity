@@ -3,7 +3,7 @@ import { Server } from "socket.io";
 import { getUser } from "./api/user-api";
 
 const httpServer = createServer();
-const io = new Server(httpServer, { cors: { origin: '*' } });
+const io = new Server(httpServer, { cors: { origin: ['https://hoe.darthoit.eu', 'http://localhost:8080'] } });
 
 io.on('connect', (socket) => {
     socket.on('helloThere', async (body) => {
