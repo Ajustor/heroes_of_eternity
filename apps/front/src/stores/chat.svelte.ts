@@ -16,8 +16,8 @@ export const chatStore = () => {
     let chat = chatData([])
 
     function onMessage(message: ChatMessage) {
-        if (message.message === 'NOT_AUTHENTICATED') {
-            chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
+        if (message.username === 'Server') {
+            console.log(message)
             return
         }
         chat.value?.push(message)
