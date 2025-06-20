@@ -30,12 +30,6 @@
 			chat.send(`Error: ${error.message}`)
 		}
 	})
-
-	$effect(() => {
-		if (isOpen && !chat.isConnected) {
-			chat.connect()
-		}
-	})
 </script>
 
 <div class="fixed right-4 bottom-4 z-50">
