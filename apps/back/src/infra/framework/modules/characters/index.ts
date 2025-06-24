@@ -4,13 +4,15 @@ import { db } from '../../data/postgres/database'
 import { CreateCharacterUseCase } from "../../../../use-cases/character/create/create-character.use-case"
 import { authorization } from '../../../../libs/handlers/authorization'
 import { ListCharactersUseCase } from "../../../../use-cases/character/list/list-characters.use-case"
+import { GetCharacterUseCase } from "../../../../use-cases/character/get/get-character.use-case"
 
 export const charactersModule = new Elysia({ prefix: 'characters' })
   .decorate({ characterRepository: new PostgresCharacterRepository(db) })
   .decorate(({ characterRepository }) => {
     return {
       listCharactersUsecase: new ListCharactersUseCase(characterRepository),
-      createCharacterUsecase: new CreateCharacterUseCase(characterRepository)
+      createCharacterUsecase: new CreateCharacterUseCase(characterRepository),
+      getCharacterUsecase: new GetCharacterUseCase(characterRepository),
     }
   })
   .get('', async ({ listCharactersUsecase, query }) => listCharactersUsecase.execute(query), {
@@ -34,4 +36,9 @@ export const charactersModule = new Elysia({ prefix: 'characters' })
     body: t.Object({
       name: t.String(),
     }),
+  })
+  .get('/:characterId', async ({ getCharacterUsecase, params: { characterId } }) => getCharacterUsecase.execute(characterId), {
+    params: t.Object({
+      characterId: t.String(),
+    })
   })
