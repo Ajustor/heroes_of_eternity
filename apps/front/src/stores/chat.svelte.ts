@@ -11,13 +11,22 @@ const chatData = (defaultChat: Chat) => rune<Chat>(defaultChat, 'chat')
 let chatApi = $state<Socket | null>(null)
 let isConnected = $state(false)
 
+enum ServerMessages {
+    NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
+}
+
 export const chatStore = () => {
     let user = userStore()
     let chat = chatData([])
 
     function onMessage(message: ChatMessage) {
-        if (message.message === 'NOT_AUTHENTICATED') {
-            chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
+        if (message.username === 'Server') {
+            switch (message.message) {
+                case ServerMessages.NOT_AUTHENTICATED:
+                    chatApi?.emit('helloThere', { accessToken: user.value?.token, message: 'Salut je viens de me connecter !' })
+                    break
+            }
+            console.log(message)
             return
         }
         chat.value?.push(message)

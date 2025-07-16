@@ -18,7 +18,7 @@
 	}
 
 	onMount(() => {
-		if (data.isLogged) {
+		if (data.isLogged && !chat.isConnected) {
 			chat.connect()
 		}
 	})
