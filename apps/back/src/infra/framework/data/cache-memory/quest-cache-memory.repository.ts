@@ -5,4 +5,5 @@ import { QuestEntity } from '@hoe/db'
 export class QuestCacheMemoryRepository
   extends RepositoryCacheMemory<QuestEntity>
   implements QuestRepository {
+
 }

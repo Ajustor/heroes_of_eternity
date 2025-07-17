@@ -14,8 +14,7 @@ export class RepositoryCacheMemory<
   }
 
   async create(data: TEntity): Promise<TEntity> {
-    data.id = data.id ?? randomUUIDv7()
-    const count = this.items.push(data)
+    const count = this.items.push({ ...data, id: data.id ?? randomUUIDv7() })
     return this.items[count - 1]
   }
 
