@@ -5,7 +5,7 @@
 </script>
 
 <div
-	class="card bg-neutral w-96 p-5 shadow-sm"
+	class="card bg-neutral p-5 shadow-sm"
 	class:highlight={isMine}
 	class:bg-red-800={character.life === 0}
 >
@@ -30,7 +30,10 @@
 				<p>{character.mana}/{character.maxMana}</p>
 			</div>
 		</div>
-		<div class="collapse-arrow collapse">
+		{#if isMine}
+			<a class="btn" href={`/characters/${character.id}`}>Modifier</a>
+		{/if}
+		<!-- <div class="collapse-arrow collapse">
 			<input type="radio" name="stats" />
 			<div class="collapse-title">Statistiques du personnage</div>
 			<div class="collapse-content">
@@ -39,12 +42,12 @@
 				<p>Dextérité : {character.dexterity}</p>
 				<p>Agilité : {character.agility}</p>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	.highlight {
-		box-shadow: 0 0 0 2px #fff01f;
+		box-shadow: 1px 1px 1px 2px #fff01f;
 	}
 </style>

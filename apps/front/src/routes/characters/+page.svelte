@@ -20,6 +20,7 @@
 		}
 
 		toast.info(message.text)
+		createCharacterModal?.close()
 	}
 
 	const charactersForm = superForm(data.newCharacterForm, {
@@ -70,11 +71,9 @@
 
 	{@render createCharacterForm()}
 
-	<div class="carousel rounded-box mt-5 gap-5">
+	<div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
 		{#each data.characters as character}
-			<div class="carousel-item">
-				<CharacterCard {character} isMine={character.userId === user.value?.id} />
-			</div>
+			<CharacterCard {character} isMine={character.userId === user.value?.id} />
 		{/each}
 	</div>
 </div>

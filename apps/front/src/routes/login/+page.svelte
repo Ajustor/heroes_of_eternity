@@ -21,6 +21,7 @@
 
 		if (message.status === 'success') {
 			toast.success(message.text)
+			selectedTab = 'login'
 			return
 		}
 
@@ -56,6 +57,7 @@
 	} = loginForm
 
 	let email = $state('')
+	let selectedTab = $state('login')
 
 	const askANewPassword = async () => {
 		if (!email) {
@@ -70,7 +72,14 @@
 
 <div class="m-auto flex h-full w-3/4 flex-col items-center justify-center">
 	<div class="tabs tabs-lift">
-		<input type="radio" name="tab" class="tab" aria-label="Connexion" checked />
+		<input
+			type="radio"
+			value="login"
+			bind:group={selectedTab}
+			name="tab"
+			class="tab"
+			aria-label="Connexion"
+		/>
 		<div class="tab-content bg-base-100 border-base-300 p-6">
 			<form method="POST" action="?/login" use:loginEnhance>
 				<div class="flex flex-col gap-3">
@@ -101,7 +110,14 @@
 			</form>
 		</div>
 
-		<input type="radio" name="tab" class="tab" aria-label="S'enregistrer" />
+		<input
+			type="radio"
+			name="tab"
+			value="register"
+			bind:group={selectedTab}
+			class="tab"
+			aria-label="S'enregistrer"
+		/>
 		<div class="tab-content bg-base-100 border-base-300 p-6">
 			<form action="?/register" method="POST" use:registerEnhance>
 				<div class="flex flex-col gap-3">

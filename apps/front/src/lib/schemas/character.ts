@@ -7,3 +7,11 @@ export const newCharacterSchema = z.object({
 })
 
 export type NewCharacterSchema = typeof newCharacterSchema
+
+
+export const updateCharacterSchema = z.object({
+    characterId: z.string(),
+
+})
+
+export type UpdateCharacterSchema = typeof updateCharacterSchema
