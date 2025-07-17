@@ -1,10 +1,14 @@
 <script lang="ts">
 	import Avatar from '../Avatar/Avatar.svelte'
 
-	let { character } = $props()
+	let { character, isMine } = $props()
 </script>
 
-<div class="card bg-neutral w-96 p-5 shadow-sm" class:bg-red-800={character.life === 0}>
+<div
+	class="card bg-neutral w-96 p-5 shadow-sm"
+	class:highlight={isMine}
+	class:bg-red-800={character.life === 0}
+>
 	<figure>
 		<Avatar skin={character.skin} className="h-24 w-24" />
 	</figure>
@@ -38,3 +42,9 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.highlight {
+		box-shadow: 0 0 0 2px #fff01f;
+	}
+</style>
