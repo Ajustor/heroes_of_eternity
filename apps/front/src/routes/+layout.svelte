@@ -20,6 +20,7 @@
 	onMount(() => {
 		if (data.isLogged && !chat.isConnected) {
 			chat.connect()
+			user.value = data.user
 		}
 	})
 

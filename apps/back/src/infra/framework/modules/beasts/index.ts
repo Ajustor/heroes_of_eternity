@@ -14,8 +14,11 @@ export const beastsModule = new Elysia({ prefix: 'beasts' })
     }
   })
   .get('', async ({ listBeastsUseCase }) => listBeastsUseCase.execute())
-  .post('', async ({ createBeastUseCase, body, set }) => {
+  .post('', async ({ createBeastUseCase, body: { adminKey, ...body }, set }) => {
     try {
+      if (adminKey !== process.env.ADMIN_KEY) {
+        throw new Error('Invalid admin key')
+      }
       await createBeastUseCase.execute(body)
       set.status = 201
     } catch (error) {
@@ -26,6 +29,7 @@ export const beastsModule = new Elysia({ prefix: 'beasts' })
     }
   }, {
     body: t.Object({
+      adminKey: t.String(),
       name: t.String(),
       skin: t.Enum(BEASTS_KEYS),
       maxMana: t.Number(),
@@ -37,8 +41,11 @@ export const beastsModule = new Elysia({ prefix: 'beasts' })
       experience: t.Optional(t.Number()),
     }),
   })
-  .post('/boss', async ({ createBeastUseCase, body, set }) => {
+  .post('/boss', async ({ createBeastUseCase, body: { adminKey, ...body }, set }) => {
     try {
+      if (adminKey !== process.env.ADMIN_KEY) {
+        throw new Error('Invalid admin key')
+      }
       await createBeastUseCase.execute({ ...body, isBoss: true })
       set.status = 201
     } catch (error) {
@@ -49,6 +56,7 @@ export const beastsModule = new Elysia({ prefix: 'beasts' })
     }
   }, {
     body: t.Object({
+      adminKey: t.String(),
       name: t.String(),
       skin: t.Enum(BOSSES_KEYS),
       maxMana: t.Number(),

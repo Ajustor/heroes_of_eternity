@@ -19,6 +19,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return redirect(302, `/login?redirectTo=${fromUrl}`)
 	}
 
+	event.locals.user = user
+
 	const response = await resolve(event)
 	return response
 }

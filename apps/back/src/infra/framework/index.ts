@@ -2,6 +2,7 @@ import { Elysia } from 'elysia'
 import { usersModule } from './modules/users'
 import { authModule } from './modules/auth'
 import { charactersModule } from './modules/characters'
+import { questsModule } from './modules/quests'
 
 import { version } from '../../../package.json'
 
@@ -23,6 +24,7 @@ const app = new Elysia()
   .use(usersModule)
   .use(authModule)
   .use(charactersModule)
+  .use(questsModule)
   .use(beastsModule)
   .listen(process.env.PORT ?? 3000)
 

@@ -3,9 +3,11 @@
 	import { zodClient } from 'sveltekit-superforms/adapters'
 	import { newCharacterSchema } from '$lib/schemas/character'
 	import { toast } from 'svelte-sonner'
+	import { userStore } from '../../stores/user'
 	import CharacterCard from '$lib/components/characters/Card/Card.svelte'
 
 	let { data } = $props()
+	let user = userStore()
 
 	function showFormMessage(message: { status: 'error' | 'success'; text: string }) {
 		if (!message) {
@@ -18,6 +20,7 @@
 		}
 
 		toast.info(message.text)
+		createCharacterModal?.close()
 	}
 
 	const charactersForm = superForm(data.newCharacterForm, {
@@ -64,15 +67,13 @@
 {/snippet}
 
 <div class="m-auto flex h-full w-3/4 flex-col items-center justify-center">
-	<h1 class="text-5xl">Mes personnages</h1>
+	<h1 class="text-5xl">Les personnages</h1>
 
 	{@render createCharacterForm()}
 
-	<div class="carousel rounded-box mt-5">
-		{#each data.myCharacters as character}
-			<div class="carousel-item">
-				<CharacterCard {character} />
-			</div>
+	<div class="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+		{#each data.characters as character}
+			<CharacterCard {character} isMine={character.userId === user.value?.id} />
 		{/each}
 	</div>
 </div>

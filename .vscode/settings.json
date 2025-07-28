@@ -1,3 +1,15 @@
 {
-  "nuxt.isNuxtApp": false
+  "nuxt.isNuxtApp": false,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "hoe",
+      "database": "heroes_of_eternity",
+      "username": "postgres",
+      "password": "your_password"
+    }
+  ]
 }
