@@ -1,5 +1,6 @@
 import type { Socket } from "socket.io"
 import { getUser } from "../api/user-api"
+import { linkTrainingSystem } from './training'
 
 export function linkChatSystem(socket: Socket) {
     socket.on('helloThere', async (body) => {
@@ -13,6 +14,7 @@ export function linkChatSystem(socket: Socket) {
             }
 
             socket.data = { ...socket.data, user }
+            linkTrainingSystem(socket)
         }
 
         socket.broadcast.emit('message', { message: body.message, username: socket.data.user?.username })

@@ -1,14 +1,12 @@
 import { createServer } from "http"
 import { Server } from "socket.io"
 import { linkChatSystem } from "./services/chat"
-import { linkTrainingSystem } from "./services/training"
 
 const httpServer = createServer()
 const io = new Server(httpServer, { cors: { origin: ['https://hoe.darthoit.eu', 'http://localhost:8080'] } })
 
 io.on('connect', (socket) => {
     linkChatSystem(socket)
-    linkTrainingSystem(socket)
 })
 
 io.on('disconnect', (socket) => {
