@@ -20,7 +20,11 @@ jobs:
           cache-dependency-path: apps/back/package-lock.json
       
       - name: Install dependencies
-        run: bun install
+        run:
+          bun install
+          bun run build:deps
+          bun install
+        
       
       - name: Run tests
         run: cd apps/back && bun test
