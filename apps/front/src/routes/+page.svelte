@@ -1,4 +1,5 @@
 <script lang="ts">
+	let { data } = $props()
 </script>
 
 <div class="m-auto flex h-full w-3/4 flex-col items-center justify-center">
@@ -28,4 +29,12 @@
 			</div>
 		</div>
 	</div>
+	<h1>Les quêtes proposées</h1>
+	{#each data.quests as quest}
+		<div class="card bg-neutral p-5 shadow-sm">
+			<h2>{quest.name}</h2>
+			<p>{quest.description}</p>
+			<a class="btn" href={`/quests/${quest.id}`}>Voir</a>
+		</div>
+	{/each}
 </div>
