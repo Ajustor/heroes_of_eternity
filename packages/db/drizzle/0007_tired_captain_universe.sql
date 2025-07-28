@@ -1,0 +1,1 @@
+ALTER TABLE "item_table" ADD COLUMN "description" text NOT NULL;

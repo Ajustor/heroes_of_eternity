@@ -5,6 +5,7 @@ import { createId } from '@paralleldrive/cuid2'
 export const itemsTable = pgTable('item_table', {
   id: text('id').primaryKey().$defaultFn(createId),
   name: text().notNull().unique(),
+  description: text().notNull(),
   intelligence: integer(),
   strength: integer(),
   agility: integer(),
