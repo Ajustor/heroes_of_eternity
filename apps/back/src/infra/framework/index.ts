@@ -4,13 +4,14 @@ import { authModule } from './modules/auth'
 import { charactersModule } from './modules/characters'
 import { questsModule } from './modules/quests'
 import { itemsModule } from './modules/items'
+import { beastsModule } from './modules/beasts'
+import { stepsModule } from './modules/steps'
 
 import { version } from '../../../package.json'
 
 import swagger from '@elysiajs/swagger'
 import cors from '@elysiajs/cors'
 import { logger } from "@tqman/nice-logger"
-import { beastsModule } from './modules/beasts'
 
 const app = new Elysia()
   .use(cors())
@@ -28,6 +29,7 @@ const app = new Elysia()
   .use(questsModule)
   .use(beastsModule)
   .use(itemsModule)
+  .use(stepsModule)
   .listen(process.env.PORT ?? 3000)
 
 console.log(
