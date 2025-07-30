@@ -16,7 +16,7 @@ export const itemsModule = new Elysia({ prefix: '/items' })
     getItemUseCase: new GetItemUseCase(itemRepository),
     listItemsUseCase: new ListItemsUseCase(itemRepository),
   }))
-  .get('/', async ({ listItemsUseCase }) => {
+  .get('', async ({ listItemsUseCase }) => {
     const items = await listItemsUseCase.execute()
     return items
   })
@@ -27,7 +27,7 @@ export const itemsModule = new Elysia({ prefix: '/items' })
     }
     return item
   })
-  .post('/', async ({ body: { adminKey, ...body }, createItemUseCase }) => {
+  .post('', async ({ body: { adminKey, ...body }, createItemUseCase }) => {
     if (adminKey !== process.env.ADMIN_KEY) {
       throw new Error('Invalid admin key')
     }
