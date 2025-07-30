@@ -7,7 +7,7 @@ import { PostgresItemRepository } from '@/infra/framework/data/postgres/item.rep
 import { db } from '@/infra/framework/data/postgres/database'
 
 
-export const itemsController = new Elysia({ prefix: '/items' })
+export const itemsModule = new Elysia({ prefix: '/items' })
   .decorate({
     itemRepository: new PostgresItemRepository(db),
   }).decorate(({ itemRepository }) => ({
