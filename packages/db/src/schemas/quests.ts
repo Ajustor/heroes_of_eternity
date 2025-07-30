@@ -44,6 +44,10 @@ export const questStepsRelations = pgTable('quest_steps', {
 }, (table) => [primaryKey({ columns: [table.questId, table.stepId] })])
 
 
+export type QuestStepsCreation = typeof questStepsRelations.$inferInsert
+export type QuestStepsEntity = typeof questStepsRelations.$inferSelect
+export const createQuestSteps = createInsertSchema(questStepsRelations)
+
 export type QuestEntity = typeof questTable.$inferSelect & { rewards?: RewardEntity[] } & { steps?: StepEntity[] }
 export type QuestCreation = typeof questTable.$inferInsert
 
