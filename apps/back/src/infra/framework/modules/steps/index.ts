@@ -31,5 +31,9 @@ export const stepsModule = new Elysia({ prefix: 'steps' })
             name: t.String(),
             description: t.String(),
             zone: t.Enum(BACKGROUNDS_KEYS),
+            beasts: t.Array(t.Object({
+                beastId: t.String(),
+                count: t.Number(),
+            })),
         }),
     })

@@ -1,7 +1,7 @@
 import { OPERATOR } from '@/core/domain/repositories/base.repository'
 import { DatabaseConnection } from './database'
 import { QuestRepository } from '@/core/domain/repositories/quest.repository'
-import { QuestCreation, QuestEntity, questStepsRelations, questTable, RewardEntity, rewardTable, StepEntity, stepsTable } from '@hoe/db'
+import { QuestCreation, QuestEntity, questOnStepTable, questTable, RewardEntity, rewardTable, StepEntity, stepsTable } from '@hoe/db'
 import { eq, or, and, SQL, inArray } from 'drizzle-orm'
 
 export class PostgresQuestRepository implements QuestRepository {
@@ -51,7 +51,7 @@ export class PostgresQuestRepository implements QuestRepository {
     }
 
     private async getSteps(questId: string): Promise<StepEntity[]> {
-        const questSteps = await this.client.select().from(questStepsRelations).where(eq(questStepsRelations.questId, questId))
+        const questSteps = await this.client.select().from(questOnStepTable).where(eq(questOnStepTable.questId, questId))
         return this.client.select().from(stepsTable).where(inArray(stepsTable.id, questSteps.map(({ stepId }) => stepId)))
     }
 

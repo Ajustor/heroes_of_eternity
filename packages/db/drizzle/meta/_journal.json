@@ -57,6 +57,13 @@
       "when": 1753710361307,
       "tag": "0007_tired_captain_universe",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1753903707014,
+      "tag": "0008_perfect_klaw",
+      "breakpoints": true
     }
   ]
 }
