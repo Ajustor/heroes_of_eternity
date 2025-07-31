@@ -4,12 +4,13 @@ import { RewardRepository } from '@/core/domain/repositories/reward.repository'
 import { QuestCreation, QuestEntity, RewardCreation, RewardEntity } from "@hoe/db"
 
 export class CreateQuestUseCase implements UseCase<QuestCreation> {
-  constructor(private readonly questRepository: QuestRepository, private readonly rewardRepository: RewardRepository) {}
+  constructor(private readonly questRepository: QuestRepository, private readonly rewardRepository: RewardRepository) { }
 
   async execute(
     name: string,
     description: string,
     rewardsCreation: RewardCreation[]
+
   ): Promise<QuestEntity> {
     const quest: QuestCreation = {
       name,

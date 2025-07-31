@@ -2,7 +2,6 @@ import { integer, primaryKey, pgTable, text, pgEnum } from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-typebox'
 import { createId } from '@paralleldrive/cuid2'
 import { BACKGROUNDS_KEYS } from "@hoe/assets"
-import { relations } from 'drizzle-orm'
 import { beastsTable } from './beast'
 import { itemsTable } from './items'
 
@@ -13,13 +12,17 @@ export const stepsTable = pgTable('steps_table', {
   zone: zoneEnum(),
 })
 
-export const stepsRelations = pgTable('beast_on_step', {
+export const beastOnStepTable = pgTable('beast_on_step', {
   beastId: text('beast_id').references(() => beastsTable.id, {
     onDelete: 'cascade',
-  }),
-  stepId: text('step_id').references(() => stepsTable.id, { onDelete: 'cascade' }),
-  count: integer().default(1)
+  }).notNull(),
+  stepId: text('step_id').references(() => stepsTable.id, { onDelete: 'cascade' }).notNull(),
+  count: integer().notNull().default(1)
 }, (table) => [primaryKey({ columns: [table.stepId, table.beastId] })])
+
+export type BeastOnStepEntity = typeof beastOnStepTable.$inferSelect
+export type BeastOnStepCreation = Omit<Required<typeof beastOnStepTable.$inferInsert>, 'stepId'>
+export const createBeastOnStep = createInsertSchema(beastOnStepTable)
 
 export const questTable = pgTable('quest_table', {
   id: text('id').primaryKey().$defaultFn(createId),
@@ -38,18 +41,22 @@ export type RewardCreation = typeof rewardTable.$inferInsert
 
 export const createReward = createInsertSchema(rewardTable)
 
-export const questStepsRelations = pgTable('quest_steps', {
+export const questOnStepTable = pgTable('quest_steps', {
   questId: text('quest_id').references(() => questTable.id, { onDelete: 'cascade' }),
   stepId: text('step_id').references(() => stepsTable.id, { onDelete: 'cascade' }),
 }, (table) => [primaryKey({ columns: [table.questId, table.stepId] })])
 
 
-export type QuestEntity = typeof questTable.$inferSelect & { rewards?: RewardEntity[] }
+export type QuestStepsCreation = typeof questOnStepTable.$inferInsert
+export type QuestStepsEntity = typeof questOnStepTable.$inferSelect
+export const createQuestSteps = createInsertSchema(questOnStepTable)
+
+export type QuestEntity = typeof questTable.$inferSelect & { rewards?: RewardEntity[] } & { steps?: (StepEntity | QuestStepsEntity)[] }
 export type QuestCreation = typeof questTable.$inferInsert
 
 export const createQuest = createInsertSchema(questTable)
 
-export type StepEntity = typeof stepsTable.$inferSelect
+export type StepEntity = typeof stepsTable.$inferSelect & { beasts?: Omit<BeastOnStepEntity, 'stepId'>[] }
 export type StepCreation = typeof stepsTable.$inferInsert
 
 export const createStep = createInsertSchema(stepsTable)

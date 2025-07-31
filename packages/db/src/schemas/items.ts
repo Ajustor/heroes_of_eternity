@@ -6,11 +6,13 @@ export const itemsTable = pgTable('item_table', {
   id: text('id').primaryKey().$defaultFn(createId),
   name: text().notNull().unique(),
   description: text().notNull(),
-  intelligence: integer(),
-  strength: integer(),
-  agility: integer(),
-  dexterity: integer(),
-  price: integer(),
+  intelligence: integer().default(0),
+  strength: integer().default(0),
+  agility: integer().default(0),
+  dexterity: integer().default(0),
+  heal: integer().default(0),
+  damage: integer().default(0),
+  price: integer().default(0),
 })
 
 export type ItemEntity = typeof itemsTable.$inferSelect

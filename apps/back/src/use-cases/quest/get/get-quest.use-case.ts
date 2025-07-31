@@ -14,9 +14,8 @@ export class GetQuestUseCase implements UseCase<QuestEntity> {
     }
 
     const rewards = await this.rewardRepository.findAll({ questId: id })
-    return {
-      ...quest,
-      rewards,
-    }
+    quest.rewards = rewards
+
+    return quest
   }
 }
