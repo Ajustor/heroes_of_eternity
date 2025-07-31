@@ -6,12 +6,13 @@ import { CreateQuestUseCase } from '../../../../use-cases/quest/create/create-qu
 import { PostgresRewardRepository } from '@/infra/framework/data/postgres/reward.repository'
 import { DeleteQuestUseCase } from '../../../../use-cases/quest/delete/delete-quest.use-case'
 import { GetQuestUseCase } from '../../../../use-cases/quest/get/get-quest.use-case'
+import { PostgresQuestStepRepository } from '@/infra/framework/data/postgres/quest-step.repository'
 
 export const questsModule = new Elysia({ prefix: 'quests' })
-  .decorate({ questsRepository: new PostgresQuestRepository(db), rewardRepository: new PostgresRewardRepository(db) })
-  .decorate(({ questsRepository, rewardRepository }) => {
+  .decorate({ questsRepository: new PostgresQuestRepository(db), rewardRepository: new PostgresRewardRepository(db), questStepRepository: new PostgresQuestStepRepository(db) })
+  .decorate(({ questsRepository, rewardRepository, questStepRepository }) => {
     return {
-      listQuestsUsecase: new ListQuestsUseCase(questsRepository, rewardRepository),
+      listQuestsUsecase: new ListQuestsUseCase(questsRepository, rewardRepository, questStepRepository),
       createQuestUsecase: new CreateQuestUseCase(questsRepository, rewardRepository),
       deleteQuestUsecase: new DeleteQuestUseCase(questsRepository, rewardRepository),
       getQuestUsecase: new GetQuestUseCase(questsRepository, rewardRepository),

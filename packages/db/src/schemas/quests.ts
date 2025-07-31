@@ -51,7 +51,7 @@ export type QuestStepsCreation = typeof questOnStepTable.$inferInsert
 export type QuestStepsEntity = typeof questOnStepTable.$inferSelect
 export const createQuestSteps = createInsertSchema(questOnStepTable)
 
-export type QuestEntity = typeof questTable.$inferSelect & { rewards?: RewardEntity[] } & { steps?: StepEntity[] }
+export type QuestEntity = typeof questTable.$inferSelect & { rewards?: RewardEntity[] } & { steps?: (StepEntity | QuestStepsEntity)[] }
 export type QuestCreation = typeof questTable.$inferInsert
 
 export const createQuest = createInsertSchema(questTable)
