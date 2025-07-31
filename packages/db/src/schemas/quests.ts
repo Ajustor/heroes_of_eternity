@@ -21,7 +21,7 @@ export const beastOnStepTable = pgTable('beast_on_step', {
 }, (table) => [primaryKey({ columns: [table.stepId, table.beastId] })])
 
 export type BeastOnStepEntity = typeof beastOnStepTable.$inferSelect
-export type BeastOnStepCreation = Required<typeof beastOnStepTable.$inferInsert>
+export type BeastOnStepCreation = Omit<Required<typeof beastOnStepTable.$inferInsert>, 'stepId'>
 export const createBeastOnStep = createInsertSchema(beastOnStepTable)
 
 export const questTable = pgTable('quest_table', {

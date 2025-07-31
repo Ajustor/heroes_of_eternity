@@ -23,7 +23,7 @@ export const stepsModule = new Elysia({ prefix: 'steps' })
         if (adminKey !== process.env.ADMIN_KEY) {
             throw new Error('Invalid admin key')
         }
-        const step = await createStepUseCase.execute(body)
+        const step = await createStepUseCase.execute(body, body.beasts)
         return step
     }, {
         body: t.Object({
